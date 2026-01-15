@@ -8,6 +8,9 @@
 
 body {
   margin: 0px;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--color-color-bg);
 }
 
 :root {
@@ -16,6 +19,9 @@ body {
   --background: #fafaf9;
   --hover-orange: rgb(255, 107, 53, 0.1);
   --orage: #ff6b35;
+  --card-dark: #2e3532;
+  --hover-orange-button: #c74d21;
+  --active-button: rgb(255, 255, 255, 0.9);
 }
 
 @theme {
@@ -23,4 +29,7 @@ body {
   --color-white-fg: var(--foreground);
   --color-hover-orange: var(--hover-orange);
   --color-orange: var(--orage);
+  --color-card-dark: var(--card-dark);
+  --color-hover-orange-button: var(--hover-orange-button);
+  --color-active-button: var(--active-button);
 }
