@@ -1,3 +1,3 @@
-import { Header } from "./ui/Header";
+import { NavSide } from "./ui/NavSide";
 
-export { Header };
+export { NavSide };
