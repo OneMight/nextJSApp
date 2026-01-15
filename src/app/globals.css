@@ -22,6 +22,8 @@ body {
   --card-dark: #2e3532;
   --hover-orange-button: #c74d21;
   --active-button: rgb(255, 255, 255, 0.9);
+  --card-bg-green: #bbf7d0;
+  --card-green: #15803d;
 }
 
 @theme {
@@ -32,4 +34,6 @@ body {
   --color-card-dark: var(--card-dark);
   --color-hover-orange-button: var(--hover-orange-button);
   --color-active-button: var(--active-button);
+  --color-card-bg-green: var(--card-bg-green);
+  --color-card-green: var(--card-green);
 }
