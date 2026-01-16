@@ -1,10 +1,13 @@
 @import "tailwindcss";
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-} */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
 
 body {
   margin: 0px;
@@ -24,6 +27,16 @@ body {
   --active-button: rgb(255, 255, 255, 0.9);
   --card-bg-green: #bbf7d0;
   --card-green: #15803d;
+  --difficult-medium: #fe9400;
+  --difficult-easy-bg: color-mix(
+    in oklab,
+    var(--color-emerald-700) 50%,
+    transparent
+  );
+  --difficult-medium-bg: color-mix(in oklab, #514000 50%, transparent);
+  --difficult-hard-bg: color-mix(#f7855b 50%, transparent);
+  --difficult-easy: #10df5c;
+  --difficult-hard: #ff6b35;
 }
 
 @theme {
@@ -36,4 +49,10 @@ body {
   --color-active-button: var(--active-button);
   --color-card-bg-green: var(--card-bg-green);
   --color-card-green: var(--card-green);
+  --color-difficult-medium: var(--difficult-medium);
+  --color-difficult-easy: var(--difficult-easy);
+  --color-difficult-hard: var(--difficult-hard);
+  --color-difficult-easy-bg: var(--difficult-easy-bg);
+  --color-difficult-medium-bg: var(--difficult-medium-bg);
+  --color-difficult-hard-bg: var(--difficult-hard-bg);
 }
