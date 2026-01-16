@@ -1,8 +1,7 @@
-export const Profile = () => {
+export default function ProfilePage() {
   return (
     <main>
       <p>Profile page</p>
     </main>
   );
-};
-export default Profile;
+}

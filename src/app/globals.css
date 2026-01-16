@@ -1,13 +1,19 @@
 @import "tailwindcss";
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-} */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
 
 body {
   margin: 0px;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--color-color-bg);
 }
 
 :root {
@@ -16,6 +22,21 @@ body {
   --background: #fafaf9;
   --hover-orange: rgb(255, 107, 53, 0.1);
   --orage: #ff6b35;
+  --card-dark: #2e3532;
+  --hover-orange-button: #c74d21;
+  --active-button: rgb(255, 255, 255, 0.9);
+  --card-bg-green: #bbf7d0;
+  --card-green: #15803d;
+  --difficult-medium: #fe9400;
+  --difficult-easy-bg: color-mix(
+    in oklab,
+    var(--color-emerald-700) 50%,
+    transparent
+  );
+  --difficult-medium-bg: color-mix(in oklab, #514000 50%, transparent);
+  --difficult-hard-bg: color-mix(#f7855b 50%, transparent);
+  --difficult-easy: #10df5c;
+  --difficult-hard: #ff6b35;
 }
 
 @theme {
@@ -23,4 +44,15 @@ body {
   --color-white-fg: var(--foreground);
   --color-hover-orange: var(--hover-orange);
   --color-orange: var(--orage);
+  --color-card-dark: var(--card-dark);
+  --color-hover-orange-button: var(--hover-orange-button);
+  --color-active-button: var(--active-button);
+  --color-card-bg-green: var(--card-bg-green);
+  --color-card-green: var(--card-green);
+  --color-difficult-medium: var(--difficult-medium);
+  --color-difficult-easy: var(--difficult-easy);
+  --color-difficult-hard: var(--difficult-hard);
+  --color-difficult-easy-bg: var(--difficult-easy-bg);
+  --color-difficult-medium-bg: var(--difficult-medium-bg);
+  --color-difficult-hard-bg: var(--difficult-hard-bg);
 }

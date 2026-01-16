@@ -1,3 +1,4 @@
+"use client";
 import { ROUTES } from "@/shared/routes";
 import { Button, LinkSide } from "@/components/index";
 import Image from "next/image";
@@ -12,7 +13,7 @@ import { useState } from "react";
 export const NavSide = () => {
   const [loggetIn, setLoggedIn] = useState(false);
   return (
-    <aside className="flex flex-col justify-between items-center w-60 bg-white-fg fixed left-0 top-0 h-full py-3">
+    <aside className="hidden md:flex flex-col h-screen justify-between items-center w-60 bg-white-fg sticky left-0 top-0 py-3 px-4">
       <div className="flex flex-col">
         <div className="my-5 text-2xl flex flex-row items-center gap-2">
           <Image
