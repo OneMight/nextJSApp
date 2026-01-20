@@ -24,11 +24,11 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
   isLoading: false,
   error: null,
   setIsLoading: (isLoading: boolean) => set({ isLoading }),
-  fetchRecipes: async (limit: number = 10) => {
+  fetchRecipes: async (limit: number = 20) => {
     set({ isLoading: true });
     try {
       const response = await fetch(
-        `https://dummyjson.com/recipes?limit=${limit}`
+        `https://dummyjson.com/recipes?limit=${limit}`,
       );
       const data = await response.json();
       set({ recipes: data.recipes, isLoading: false });

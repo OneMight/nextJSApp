@@ -4,7 +4,7 @@ export interface ComponentProps {
   children: React.ReactNode;
 }
 
-export interface LinkCompProp {
+export interface LinkCompProp extends ComponentProps {
   href: string;
 }
 
@@ -14,4 +14,12 @@ export interface RecipeProps {
 export interface ScrollRecipesProps {
   recipes: Recipe[];
   isLoading: boolean;
+}
+export interface FooterCardProps extends ComponentProps {
+  title: string;
+  buttonText: string;
+  bgColor: string;
+  color: string;
+  borderColor?: string;
+  hoverBg: string;
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ComponentProps, LinkCompProp } from "@/types/interfaces";
+import { LinkCompProp } from "@/types/interfaces";
 
-export const LinkSide = ({ children, href }: ComponentProps & LinkCompProp) => {
+export const LinkSide = ({ children, href }: LinkCompProp) => {
   return (
     <Link
       className="w-45

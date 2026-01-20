@@ -4,18 +4,18 @@ import { Button } from "./Button";
 
 export const HomeSection = () => {
   return (
-    <section className="flex flex-col items-start rounded-2xl bg-card-dark p-8 gap-7 relative">
+    <section className="flex flex-col items-center rounded-2xl bg-card-dark sm:p-8 p-4 mx-4 gap-7 sm:relative sm:items-start">
       <div className="rounded-2xl bg-hover-orange text-orange py-1 px-2 ">
         #1 Cooking Community
       </div>
-      <h1 className="text-white text-5xl font-bold w-[70%]">
+      <h1 className="text-white sm:text-5xl text-3xl font-bold sm:w-[70%] w-full">
         Master the Art of <span className="text-orange">Home Cooking</span>
       </h1>
-      <p className="text-white w-[60%]">
+      <p className="text-white sm:w-[60%] w-full">
         Discover thousands of tested recipes, learn new techniques, and share
         your culinary masterpieces with the world.
       </p>
-      <div className="flex flex-row gap-6 items-center">
+      <div className="flex gap-6 items-center flex-col sm:flex-row ">
         <Button className="bg-orange font-normal hover:bg-hover-orange-button active:bg-active-button text-white p-6">
           Explore Recipes
         </Button>
@@ -24,7 +24,7 @@ export const HomeSection = () => {
         </Button>
       </div>
       <Image
-        className="absolute right-0 top-0"
+        className="absolute right-0 top-0 sm:block hidden"
         width={300}
         alt="icon"
         src={SectionIcon}
