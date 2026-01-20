@@ -57,7 +57,7 @@ export const NavSide = () => {
         </nav>
       </div>
       {!loggetIn ? (
-        <LinkSide href={ROUTES.LOGINING}>
+        <LinkSide href={ROUTES.LOGIN}>
           <Image src={ExitIcon} width={20} height={20} alt="log-in" />
           Log-in
         </LinkSide>

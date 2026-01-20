@@ -7,6 +7,7 @@ import SectionIcon from "@/assets/section-icon.svg";
 import TimeIcon from "@/assets/time-icon.svg";
 import DirectIcon from "@/assets/direct-icon.svg";
 import KcalIcon from "@/assets/kcal-icon.svg";
+import WhiteDirectIcon from "@/assets/white-direct-icon.svg";
 export {
   LogoIcon,
   ExitIcon,
@@ -17,4 +18,5 @@ export {
   DirectIcon,
   TimeIcon,
   KcalIcon,
+  WhiteDirectIcon,
 };
