@@ -6,6 +6,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <title>CookBook</title>
       <body>{children}</body>
     </html>
   );

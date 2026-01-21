@@ -33,6 +33,7 @@ body {
     var(--color-emerald-700) 50%,
     transparent
   );
+  --secondary-text: #6b7280;
   --difficult-medium-bg: color-mix(in oklab, #514000 50%, transparent);
   --difficult-hard-bg: color-mix(#f7855b 50%, transparent);
   --difficult-easy: #10df5c;
@@ -56,4 +57,5 @@ body {
   --color-difficult-medium-bg: var(--difficult-medium-bg);
   --color-difficult-hard-bg: var(--difficult-hard-bg);
   --breakpoint-xlg: 825px;
+  --color-secondary-text: var(--secondary-text);
 }

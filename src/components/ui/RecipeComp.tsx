@@ -8,10 +8,9 @@ export const RecipeComp = ({ recipe }: RecipeProps) => {
     <article className="w-67.5 shrink-0 relative bg-white-fg rounded-2xl hover:drop-shadow-md transition hover:cursor-pointer group">
       <div className="overflow-hidden">
         <Image
-          id="image_card"
-          className="rounded-t-2xl group-hover:scale-110 transition-transform duration-300"
+          className="rounded-t-2xl w-auto group-hover:scale-110 transition-transform duration-300"
           width={270}
-          height={180}
+          height={270}
           src={recipe.image}
           alt={recipe.name}
         />
@@ -24,9 +23,9 @@ export const RecipeComp = ({ recipe }: RecipeProps) => {
             recipe.difficulty === "Easy"
               ? "text-difficult-easy bg-difficult-easy-bg"
               : recipe.difficulty === "Medium"
-              ? "text-difficult-medium bg-difficult-medium-bg"
-              : "text-difficult-hard bg-difficult-hard-bg"
-          }`
+                ? "text-difficult-medium bg-difficult-medium-bg"
+                : "text-difficult-hard bg-difficult-hard-bg"
+          }`,
         )}
       >
         {recipe.difficulty}
@@ -36,11 +35,16 @@ export const RecipeComp = ({ recipe }: RecipeProps) => {
         <h2>{recipe.name}</h2>
         <div className="flex flex-row w-full items-center justify-between">
           <p className="flex flex-row gap-1">
-            <Image src={TimeIcon} width={16} alt="time-icon" />
+            <Image
+              src={TimeIcon}
+              width={16}
+              className="w-auto"
+              alt="time-icon"
+            />
             {recipe.cookTimeMinutes} minutes
           </p>
           <p className="flex flex-row gap-1">
-            <Image src={KcalIcon} alt="kcal-icon" />
+            <Image src={KcalIcon} className="w-auto" alt="kcal-icon" />
             {recipe.caloriesPerServing}kcal/several
           </p>
         </div>
