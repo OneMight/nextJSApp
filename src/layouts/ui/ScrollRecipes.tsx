@@ -3,7 +3,7 @@ import Image from "next/image";
 import { RecipeComp } from "@/components";
 import { DirectIcon } from "@/shared/images";
 import { ROUTES } from "@/shared/routes";
-import { ScrollSkeleton } from "./ScrollSkeleton";
+import { RecipeSkeleton } from "@/components/index";
 import { ScrollRecipesProps } from "@/types/interfaces";
 export const ScrollRecipes = ({ recipes, isLoading }: ScrollRecipesProps) => {
   return (
@@ -29,11 +29,9 @@ export const ScrollRecipes = ({ recipes, isLoading }: ScrollRecipesProps) => {
             ))
           ) : (
             <>
-              <ScrollSkeleton />
-              <ScrollSkeleton />
-              <ScrollSkeleton />
-              <ScrollSkeleton />
-              <ScrollSkeleton />
+              {Array.from({ length: 5 }, (_, index) => (
+                <RecipeSkeleton key={index} />
+              ))}
             </>
           )}
         </div>

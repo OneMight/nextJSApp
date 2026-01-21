@@ -1,3 +1,4 @@
+import { Difficulty } from "@/types/types";
 import { create } from "zustand";
 
 export interface Recipe {
@@ -5,7 +6,7 @@ export interface Recipe {
   name: string;
   ingredients: string[];
   instructions: string[];
-  difficulty: "Easy" | "Medium" | "Hard";
+  difficulty: Difficulty;
   cuisine: string;
   servings: number;
   cookTimeMinutes: number;
@@ -24,11 +25,11 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
   isLoading: false,
   error: null,
   setIsLoading: (isLoading: boolean) => set({ isLoading }),
-  fetchRecipes: async (limit: number = 20) => {
+  fetchRecipes: async (limit: number = 0) => {
     set({ isLoading: true });
     try {
       const response = await fetch(
-        `https://dummyjson.com/recipes?limit=${limit}`,
+        `https://dummyjson.com/recipes?limit=${limit}&sortBy=name`,
       );
       const data = await response.json();
       set({ recipes: data.recipes, isLoading: false });

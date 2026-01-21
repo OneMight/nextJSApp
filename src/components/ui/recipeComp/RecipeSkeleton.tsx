@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/Skeleton";
 
-export const ScrollSkeleton = () => {
+export const RecipeSkeleton = () => {
   return (
     <article className="w-67.5 shrink-0 relative bg-white-fg rounded-2xl overflow-hidden">
       <Skeleton className="w-full h-45 rounded-t-2xl rounded-b-none bg-slate-200/80" />
