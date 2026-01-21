@@ -19,6 +19,7 @@ export interface RecipesState {
   error: unknown | null;
   setIsLoading: (isLoading: boolean) => void;
   fetchRecipes: (limit?: number) => void;
+  findRecipe: (search: string) => void;
 }
 export const useRecipesStore = create<RecipesState>()((set) => ({
   recipes: [],
@@ -30,6 +31,18 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
     try {
       const response = await fetch(
         `https://dummyjson.com/recipes?limit=${limit}&sortBy=name`,
+      );
+      const data = await response.json();
+      set({ recipes: data.recipes, isLoading: false });
+    } catch (error) {
+      set({ error, isLoading: false });
+    }
+  },
+  findRecipe: async (search: string) => {
+    try {
+      set({ isLoading: true });
+      const response = await fetch(
+        `https://dummyjson.com/recipes/search?q=${search}`,
       );
       const data = await response.json();
       set({ recipes: data.recipes, isLoading: false });
