@@ -3,9 +3,7 @@ import { FooterCard, HomeSection, ScrollRecipes } from "@/components";
 import { useRecipesStore } from "@/store/recipesStore";
 import { useEffect } from "react";
 export default function Home() {
-  const { fetchRecipes, recipes, isLoading } = useRecipesStore(
-    (state) => state,
-  );
+  const { fetchRecipes, recipes, isLoading } = useRecipesStore();
 
   useEffect(() => {
     fetchRecipes();

@@ -1,3 +1,3 @@
 import { NavSide } from "./ui/NavSide";
-
-export { NavSide };
+import { LoginForm } from "./ui/LoginForm";
+export { NavSide, LoginForm };

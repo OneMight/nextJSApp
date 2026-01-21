@@ -7,7 +7,6 @@ import { FooterCard } from "./ui/FooterCard";
 import { Input } from "./ui/Input";
 import { Label } from "./ui/Label";
 import * as Form from "./ui/Form";
-import { LoginForm } from "./ui/LoginForm";
 export {
   Button,
   LinkSide,
@@ -18,5 +17,4 @@ export {
   Input,
   Label,
   Form,
-  LoginForm,
 };

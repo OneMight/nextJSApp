@@ -5,19 +5,30 @@ import { WhiteDirectIcon } from "@/shared/images";
 import Image from "next/image";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import { useUserStore } from "@/store/userStore";
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/shared/routes";
 export const LoginForm = () => {
   const form = useForm();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login, setError } = useUserStore();
   const handleSetUsername = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
   const handleSetPassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const tokens = await login(username, password);
+    if (tokens?.accessToken && tokens?.refreshToken) {
+      document.cookie = `accessToken=${tokens.accessToken}`;
+      document.cookie = `refreshToken=${tokens.refreshToken}`;
+      redirect(ROUTES.HOME);
+    } else {
+      setError("Something went wrong");
+    }
   };
 
   return (

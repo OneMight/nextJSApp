@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components";
+import { LoginForm } from "@/layouts/index";
 import { NavSide } from "@/layouts";
 import { RecipesIcon } from "@/shared/images";
 import Image from "next/image";

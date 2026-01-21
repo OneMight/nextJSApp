@@ -9,9 +9,19 @@ import {
   ProfileIcon,
   RecipesIcon,
 } from "@/shared/images";
-import { useState } from "react";
+import { useUserStore } from "@/store/userStore";
+import { deleteCookieToken } from "@/utils/cookiesFunc";
+import { useEffect } from "react";
 export const NavSide = () => {
-  const [loggetIn, setLoggedIn] = useState(false);
+  const { user, getAuth, logout } = useUserStore();
+  useEffect(() => {
+    getAuth();
+  }, [getAuth]);
+  const handleLogOut = () => {
+    deleteCookieToken("accessToken");
+    deleteCookieToken("refreshToken");
+    logout();
+  };
   return (
     <aside className="hidden xlg:flex flex-col h-screen justify-between items-center w-60 bg-white-fg sticky left-0 top-0 py-3 px-4">
       <div className="flex flex-col">
@@ -45,24 +55,32 @@ export const NavSide = () => {
             />
             Recipes
           </LinkSide>
-          <LinkSide href={ROUTES.PROFILE}>
-            <Image
-              src={ProfileIcon}
-              width={20}
-              height={20}
-              alt="profile-icon"
-            />
-            Profile
-          </LinkSide>
+          {user?.username && (
+            <LinkSide href={ROUTES.PROFILE}>
+              <Image
+                src={ProfileIcon}
+                width={20}
+                height={20}
+                alt="profile-icon"
+              />
+              Profile
+            </LinkSide>
+          )}
         </nav>
       </div>
-      {!loggetIn ? (
+      {!user?.username ? (
         <LinkSide href={ROUTES.LOGIN}>
           <Image src={ExitIcon} width={20} height={20} alt="log-in" />
           Log-in
         </LinkSide>
       ) : (
-        <Button>Log in</Button>
+        <Button
+          onClick={handleLogOut}
+          className="bg-orange w-full text-white text-md flex flex-row items-center justify-center gap-3 py-5"
+        >
+          Log out
+          <Image src={ExitIcon} width={20} height={20} alt="log-in" />
+        </Button>
       )}
     </aside>
   );
