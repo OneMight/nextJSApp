@@ -23,3 +23,10 @@ export interface FooterCardProps extends ComponentProps {
   borderColor?: string;
   hoverBg: string;
 }
+export interface ProfileFormType {
+  className?: string;
+  userId: number;
+}
+export interface EditProfileProp {
+  id: NonNullable<number>;
+}

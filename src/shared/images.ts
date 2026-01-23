@@ -8,6 +8,8 @@ import TimeIcon from "@/assets/time-icon.svg";
 import DirectIcon from "@/assets/direct-icon.svg";
 import KcalIcon from "@/assets/kcal-icon.svg";
 import WhiteDirectIcon from "@/assets/white-direct-icon.svg";
+import LocationIcon from "@/assets/location-icon.svg";
+import SettingsIcon from "@/assets/settings-icon.svg";
 export {
   LogoIcon,
   ExitIcon,
@@ -19,4 +21,6 @@ export {
   TimeIcon,
   KcalIcon,
   WhiteDirectIcon,
+  LocationIcon,
+  SettingsIcon,
 };
