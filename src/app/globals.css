@@ -57,5 +57,7 @@ body {
   --color-difficult-medium-bg: var(--difficult-medium-bg);
   --color-difficult-hard-bg: var(--difficult-hard-bg);
   --breakpoint-xlg: 825px;
+  --breakpoint-lt: 1400px;
+  --breakpoint-slt: 1100px;
   --color-secondary-text: var(--secondary-text);
 }

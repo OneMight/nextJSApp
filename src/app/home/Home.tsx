@@ -1,12 +1,13 @@
 "use client";
-import { FooterCard, HomeSection, ScrollRecipes } from "@/components";
+import { FooterCard, HomeSection } from "@/components";
+import { ScrollRecipes } from "@/layouts/index";
 import { useRecipesStore } from "@/store/recipesStore";
 import { useEffect } from "react";
 export default function Home() {
   const { fetchRecipes, recipes, isLoading } = useRecipesStore();
 
   useEffect(() => {
-    fetchRecipes();
+    fetchRecipes(10);
   }, [fetchRecipes]);
 
   return (
