@@ -8,6 +8,7 @@ import { Input } from "./ui/Input";
 import { Label } from "./ui/Label";
 import * as Form from "./ui/Form";
 import * as Tabs from "./ui/Tabs";
+import * as Pagination from "./ui/Pagination";
 export {
   Button,
   LinkSide,
@@ -19,4 +20,5 @@ export {
   RecipeSkeleton,
   Form,
   Tabs,
+  Pagination,
 };

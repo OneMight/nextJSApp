@@ -4,10 +4,14 @@ import { cn } from "@/lib/utils";
 import { Recipe, useRecipesStore } from "@/store/recipesStore";
 import { Difficulty } from "@/types/types";
 import { ChangeEvent, useEffect, useState } from "react";
+import { RecipesPagination } from "./RecipesPagination";
 export const RecipesView = () => {
-  const { fetchRecipes, recipes, isLoading, findRecipe } = useRecipesStore();
+  const { fetchRecipes, recipes, isLoading, findRecipe, pages } =
+    useRecipesStore();
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [skip, setSkip] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
   const [tabValue, setTabValue] = useState<Difficulty | null>(null);
   useEffect(() => {
@@ -19,18 +23,31 @@ export const RecipesView = () => {
     };
   }, [search]);
   useEffect(() => {
-    findRecipe(debouncedSearch);
-  }, [debouncedSearch, findRecipe]);
+    findRecipe(debouncedSearch, skip);
+  }, [debouncedSearch, findRecipe, skip]);
   const handleFetchRecipes = () => {
     setTabValue(null);
-    fetchRecipes(50);
+    fetchRecipes(12, skip);
   };
   const handleGetRecipesByDifficulty = (difficult: Difficulty) => {
     setTabValue(difficult);
     setFilteredRecipes(recipes.filter((elem) => elem.difficulty === difficult));
   };
+  const handleSetPage = (index: number) => {
+    setSkip(12 * index);
+    setCurrentPage(index);
+  };
   const handleSetSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+    setSkip(0);
+  };
+  const handleNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+    setSkip((prev) => prev + 12);
+  };
+  const handlePreviousPage = () => {
+    setCurrentPage((prev) => prev - 1);
+    setSkip((prev) => prev - 12);
   };
   return (
     <div className="flex flex-col gap-10">
@@ -94,6 +111,15 @@ export const RecipesView = () => {
           )}
         </Tabs.TabsContent>
       </Tabs.Tabs>
+      {!tabValue && (
+        <RecipesPagination
+          pages={pages}
+          handleNextPage={handleNextPage}
+          handlePreviousPage={handlePreviousPage}
+          handleSetPage={handleSetPage}
+          currentPage={currentPage}
+        />
+      )}
     </div>
   );
 };

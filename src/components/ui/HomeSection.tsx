@@ -1,8 +1,12 @@
 import { SectionIcon } from "@/shared/images";
 import Image from "next/image";
 import { Button } from "./Button";
-
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/shared/routes";
 export const HomeSection = () => {
+  const handleDirectToRecipes = () => {
+    redirect(ROUTES.RECIPES);
+  };
   return (
     <section className="flex flex-col items-center rounded-2xl bg-card-dark sm:p-8 p-4 mx-4 gap-7 sm:relative sm:items-start">
       <div className="rounded-2xl bg-hover-orange text-orange py-1 px-2 ">
@@ -16,7 +20,10 @@ export const HomeSection = () => {
         your culinary masterpieces with the world.
       </p>
       <div className="flex gap-6 items-center flex-col sm:flex-row ">
-        <Button className="bg-orange font-normal hover:bg-hover-orange-button active:bg-active-button text-white p-6">
+        <Button
+          className="bg-orange font-normal hover:bg-hover-orange-button active:bg-active-button text-white p-6"
+          onClick={handleDirectToRecipes}
+        >
           Explore Recipes
         </Button>
         <Button className="text-white hover:bg-black p-6 active:bg-active-button">
