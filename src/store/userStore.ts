@@ -32,6 +32,7 @@ export const useUserStore = create<UserData>()((set) => ({
   user: null,
   isLoading: false,
   error: null,
+  userRecipes: [],
   login: async (
     username: string,
     password: string,

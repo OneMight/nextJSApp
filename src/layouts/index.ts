@@ -6,6 +6,8 @@ import { RecipesPagination } from "./ui/RecipesPagination";
 import { ProfileTitle } from "./ui/ProfileTitle/ProfileTitle";
 import { ProfileTitleSkeleton } from "./ui/ProfileTitle/ProfileTitleSkeleton";
 import { EditProfileDrawer } from "./ui/EditProfileDrawer";
+import { ProfileTabs } from "./ui/ProfileTabs";
+import { CreateRecipe } from "./ui/CreateRecipe";
 export {
   NavSide,
   LoginForm,
@@ -15,4 +17,6 @@ export {
   ProfileTitle,
   EditProfileDrawer,
   ProfileTitleSkeleton,
+  ProfileTabs,
+  CreateRecipe,
 };

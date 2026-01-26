@@ -1,4 +1,5 @@
 import { Recipe } from "@/store/recipesStore";
+import { Difficulty } from "./types";
 
 export interface ComponentProps {
   children: React.ReactNode;
@@ -29,4 +30,9 @@ export interface ProfileFormType {
 }
 export interface EditProfileProp {
   id: NonNullable<number>;
+}
+export interface SelectDifficultProps {
+  onValueChange: (value: Difficulty) => void;
+  value?: string;
+  defaultValue?: string;
 }
