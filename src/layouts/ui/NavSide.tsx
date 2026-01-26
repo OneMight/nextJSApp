@@ -2,6 +2,7 @@
 import { ROUTES } from "@/shared/routes";
 import { Button, LinkSide } from "@/components/index";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import {
   ExitIcon,
   HomeIcon,
@@ -21,6 +22,7 @@ export const NavSide = () => {
     deleteCookieToken("accessToken");
     deleteCookieToken("refreshToken");
     logout();
+    redirect(ROUTES.HOME);
   };
   return (
     <aside className="hidden xlg:flex flex-col h-screen justify-between items-center w-60 bg-white-fg sticky left-0 top-0 py-3 px-4">

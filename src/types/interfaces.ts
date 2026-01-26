@@ -1,4 +1,5 @@
 import { Recipe } from "@/store/recipesStore";
+import { Difficulty } from "./types";
 
 export interface ComponentProps {
   children: React.ReactNode;
@@ -22,4 +23,16 @@ export interface FooterCardProps extends ComponentProps {
   color: string;
   borderColor?: string;
   hoverBg: string;
+}
+export interface ProfileFormType {
+  className?: string;
+  userId: number;
+}
+export interface EditProfileProp {
+  id: NonNullable<number>;
+}
+export interface SelectDifficultProps {
+  onValueChange: (value: Difficulty) => void;
+  value?: string;
+  defaultValue?: string;
 }

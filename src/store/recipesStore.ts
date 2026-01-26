@@ -2,12 +2,12 @@ import { Difficulty } from "@/types/types";
 import { create } from "zustand";
 
 export interface Recipe {
-  id: number;
+  id?: number;
   name: string;
   ingredients: string[];
   instructions: string[];
   difficulty: Difficulty;
-  cuisine: string;
+  cuisine?: string;
   servings: number;
   cookTimeMinutes: number;
   caloriesPerServing: number;
@@ -16,16 +16,23 @@ export interface Recipe {
 export interface RecipesState {
   recipes: Recipe[];
   isLoading: boolean;
+  savedRecipes: Recipe[];
   error: unknown | null;
   pages: number;
+  userRecipes: Recipe[];
   setIsLoading: (isLoading: boolean) => void;
   fetchRecipes: (limit?: number, skip?: number) => void;
   findRecipe: (search: string, skip: number) => void;
+  saveRecipe: (recipe: Recipe) => void;
+  getUserRecipes: () => void;
+  createRecipe: (recipe: Recipe) => void;
 }
 export const useRecipesStore = create<RecipesState>()((set) => ({
   recipes: [],
   isLoading: false,
   error: null,
+  savedRecipes: [],
+  userRecipes: [],
   pages: 0,
   setIsLoading: (isLoading: boolean) => set({ isLoading }),
   fetchRecipes: async (limit: number = 0, skip: number = 0) => {
@@ -59,5 +66,21 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
     } catch (error) {
       set({ error, isLoading: false });
     }
+  },
+  getUserRecipes: async () => {
+    try {
+      set({ isLoading: true });
+      const response = await fetch(`https://dummyjson.com/recipes?limit=3`);
+      const data = await response.json();
+      set({ userRecipes: data.recipes, isLoading: false });
+    } catch (error) {
+      set({ error });
+    }
+  },
+  saveRecipe: (recipe: Recipe) => {
+    set((state) => ({ savedRecipes: { ...state.savedRecipes, recipe } }));
+  },
+  createRecipe: (recipe: Recipe) => {
+    set((state) => ({ userRecipes: [...state.userRecipes, recipe] }));
   },
 }));

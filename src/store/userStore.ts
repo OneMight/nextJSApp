@@ -1,3 +1,4 @@
+import { ChangeCredintionalsType } from "@/types/types";
 import { handleGetToken } from "@/utils/cookiesFunc";
 import { create } from "zustand";
 type AdressData = {
@@ -25,11 +26,13 @@ export interface UserData {
   login: (username: string, password: string) => Promise<Tokens | undefined>;
   getAuth: () => void;
   logout: () => void;
+  updateUser: (userProp: ChangeCredintionalsType) => void;
 }
 export const useUserStore = create<UserData>()((set) => ({
   user: null,
   isLoading: false,
   error: null,
+  userRecipes: [],
   login: async (
     username: string,
     password: string,
@@ -42,7 +45,7 @@ export const useUserStore = create<UserData>()((set) => ({
         body: JSON.stringify({
           username,
           password,
-          expiresInMins: 30,
+          expiresInMins: 60 * 2,
         }),
         credentials: "omit",
       });
@@ -73,5 +76,19 @@ export const useUserStore = create<UserData>()((set) => ({
   },
   logout: () => {
     set({ user: null });
+  },
+  updateUser: async (userProp: ChangeCredintionalsType) => {
+    try {
+      set((state) => ({ user: { ...state.user, ...userProp } as User }));
+      await fetch(`https://dummyjson.com/users/${userProp.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...userProp,
+        }),
+      });
+    } catch (error) {
+      set({ error });
+    }
   },
 }));
