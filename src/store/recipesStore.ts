@@ -2,7 +2,7 @@ import { Difficulty } from "@/types/types";
 import { create } from "zustand";
 
 export interface Recipe {
-  id?: number;
+  id: number;
   name: string;
   ingredients: string[];
   instructions: string[];
@@ -20,12 +20,15 @@ export interface RecipesState {
   error: unknown | null;
   pages: number;
   userRecipes: Recipe[];
+  currentRecipe: Recipe | null;
   setIsLoading: (isLoading: boolean) => void;
   fetchRecipes: (limit?: number, skip?: number) => void;
   findRecipe: (search: string, skip: number) => void;
   saveRecipe: (recipe: Recipe) => void;
   getUserRecipes: () => void;
   createRecipe: (recipe: Recipe) => void;
+  getRecipeById: (id: number) => void;
+  removeFromSaved: (id: number) => void;
 }
 export const useRecipesStore = create<RecipesState>()((set) => ({
   recipes: [],
@@ -33,6 +36,7 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
   error: null,
   savedRecipes: [],
   userRecipes: [],
+  currentRecipe: null,
   pages: 0,
   setIsLoading: (isLoading: boolean) => set({ isLoading }),
   fetchRecipes: async (limit: number = 0, skip: number = 0) => {
@@ -78,9 +82,23 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
     }
   },
   saveRecipe: (recipe: Recipe) => {
-    set((state) => ({ savedRecipes: { ...state.savedRecipes, recipe } }));
+    set((state) => ({ savedRecipes: [...state.savedRecipes, recipe] }));
   },
   createRecipe: (recipe: Recipe) => {
     set((state) => ({ userRecipes: [...state.userRecipes, recipe] }));
+  },
+  getRecipeById: async (id: number) => {
+    try {
+      set({ isLoading: true });
+      const response = await fetch(`https://dummyjson.com/recipes/${id}`);
+      set({ isLoading: false, currentRecipe: await response.json() });
+    } catch (error) {
+      set({ error });
+    }
+  },
+  removeFromSaved: (id) => {
+    set((state) => ({
+      savedRecipes: state.savedRecipes.filter((elem) => elem.id !== id),
+    }));
   },
 }));

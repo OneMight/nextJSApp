@@ -11,6 +11,7 @@ export interface LinkCompProp extends ComponentProps {
 
 export interface RecipeProps {
   recipe: Recipe;
+  isSaved?: boolean;
 }
 export interface ScrollRecipesProps {
   recipes: Recipe[];
