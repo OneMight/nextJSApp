@@ -54,7 +54,7 @@ export const RecipesView = () => {
     setSkip((prev) => prev - 12);
   };
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 w-full">
       <Input
         value={search}
         onChange={(e) => handleSetSearch(e)}
