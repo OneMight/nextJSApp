@@ -1,7 +1,6 @@
 "use client";
 import { ProfileTabs, ProfileTitle, UnauthUser } from "@/layouts";
 import { ProfileTitleSkeleton } from "@/layouts/index";
-import { cn } from "@/lib/utils";
 import { useUserStore } from "@/store/userStore";
 import { useEffect } from "react";
 
@@ -16,15 +15,13 @@ export default function Profile() {
   }
 
   return (
-    <main className={cn("flex")}>
-      <div className="w-full flex flex-col gap-10 items-center justify-start p-5">
-        {isLoading || user?.message ? (
-          <ProfileTitleSkeleton />
-        ) : (
-          user && <ProfileTitle user={user} />
-        )}
-        <ProfileTabs />
-      </div>
-    </main>
+    <div className="w-full flex flex-col gap-10 items-center justify-start p-5">
+      {isLoading || user?.message ? (
+        <ProfileTitleSkeleton />
+      ) : (
+        user && <ProfileTitle user={user} />
+      )}
+      <ProfileTabs />
+    </div>
   );
 }
