@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { CreateRecipe } from "./CreateRecipe";
 
 export const ProfileTabs = () => {
-  const { getUserRecipes, userRecipes, isLoading, savedRecipes } =
+  const { getUserRecipes, userRecipes, isLoadingRecipes, savedRecipes } =
     useRecipesStore();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const ProfileTabs = () => {
         <Tabs.TabsTrigger value="Saved">Saved</Tabs.TabsTrigger>
       </Tabs.TabsList>
       <Tabs.TabsContent value="My recipes">
-        {!isLoading ? (
+        {!isLoadingRecipes ? (
           <>
             {userRecipes.map((recipe, index) => (
               <RecipeComp recipe={recipe} key={index} />

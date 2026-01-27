@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components";
-import { NavSide } from "@/layouts";
 import { cn } from "@/lib/utils";
 import { useRecipesStore } from "@/store/recipesStore";
 import Image from "next/image";
@@ -27,7 +26,6 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
   };
   return (
     <main className="flex flex-row">
-      <NavSide />
       <div className="flex flex-col items-center xlg:p-10 w-full justify-start ">
         {currentRecipe && (
           <>

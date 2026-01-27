@@ -1,11 +1,6 @@
-import { NavSide } from "@/layouts";
+"use client";
 import Home from "@/app/home/Home";
 
 export default function Page() {
-  return (
-    <div className="flex flex-row">
-      <NavSide />
-      <Home />
-    </div>
-  );
+  return <Home />;
 }

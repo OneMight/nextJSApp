@@ -26,7 +26,7 @@ function TabsList({
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "bg-white-fg gap-4  text-muted-foreground inline-flex h-10 sm:h-15 w-fit items-center justify-center rounded-lg p-1 ",
+        "bg-white-fg gap-4 text-muted-foreground inline-flex h-10 sm:h-15 w-fit items-center justify-center rounded-lg p-1 ",
         className,
       )}
       {...props}
@@ -47,7 +47,7 @@ function TabsTrigger({
         "text-foreground focus:bg-orange cursor-pointer transition-all",
         "inline-flex h-[calc(100%-1px)] flex-1",
         "items-center justify-center gap-1.5 rounded-md",
-        "border border-transparent px-2 py-1 text-md",
+        "border border-transparent p-3 text-md",
         "font-medium whitespace-nowrap transition-[color,box-shadow]",
         "focus-visible:ring-[3px] focus-visible:outline-1",
         "disabled:pointer-events-none disabled:opacity-50",
@@ -68,7 +68,7 @@ function TabsContent({
     <TabsPrimitive.Content
       data-slot="tabs-content"
       className={cn(
-        "grid  lt:grid-cols-4  slt:grid-cols-3 sm:max-slt:grid-cols-2 justify-center grid-cols-[minmax(1,270px)]  gap-4 grid-rows-1 outline-none",
+        "grid lt:grid-cols-4 slt:grid-cols-3 w-full max-w-300 sm:max-slt:grid-cols-2 justify-center grid-cols-[minmax(1,270px)]  gap-4 grid-rows-1 outline-none",
         className,
       )}
       {...props}
