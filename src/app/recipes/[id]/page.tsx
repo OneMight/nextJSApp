@@ -68,7 +68,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
             </div>
             <div className="flex flex-col bg-white-fg px-2 py-5 bml:p-5 w-full max-w-325 rounded-b-2xl">
               <div className="flex flex-row items-center justify-between">
-                <div className="flex flex-col items-start gap-10 bml:items-center bml:flex-row">
+                <div className="flex flex-col bml:flex-row items-start gap-10 bml:items-center ">
                   <div className="flex flex-row gap-3">
                     <Image src={TimeIcon} alt="cooking time" />
                     {currentRecipe.cookTimeMinutes} min

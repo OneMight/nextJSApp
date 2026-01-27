@@ -56,7 +56,7 @@ body {
   --color-difficult-easy-bg: var(--difficult-easy-bg);
   --color-difficult-medium-bg: var(--difficult-medium-bg);
   --color-difficult-hard-bg: var(--difficult-hard-bg);
-  --breakpoint-bml: 500px;
+  --breakpoint-bml: 510px;
   --breakpoint-xlg: 825px;
   --breakpoint-lt: 1400px;
   --breakpoint-slt: 1100px;

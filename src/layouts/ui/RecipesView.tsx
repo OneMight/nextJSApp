@@ -5,9 +5,11 @@ import { Recipe, useRecipesStore } from "@/store/recipesStore";
 import { Difficulty } from "@/types/types";
 import { ChangeEvent, useEffect, useState } from "react";
 import { RecipesPagination } from "./RecipesPagination";
+import { useUserStore } from "@/store/userStore";
 export const RecipesView = () => {
-  const { fetchRecipes, recipes, isLoading, findRecipe, pages } =
+  const { fetchRecipes, recipes, isLoadingRecipes, findRecipe, pages } =
     useRecipesStore();
+  const { isLoading } = useUserStore();
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,8 +25,10 @@ export const RecipesView = () => {
     };
   }, [search]);
   useEffect(() => {
-    findRecipe(debouncedSearch, skip);
-  }, [debouncedSearch, findRecipe, skip]);
+    if (!isLoading) {
+      findRecipe(debouncedSearch, skip);
+    }
+  }, [debouncedSearch, findRecipe, skip, isLoading]);
   const handleFetchRecipes = () => {
     setTabValue(null);
     fetchRecipes(12, skip);
@@ -88,7 +92,7 @@ export const RecipesView = () => {
           </Tabs.TabsTrigger>
         </Tabs.TabsList>
         <Tabs.TabsContent value="All">
-          {!isLoading ? (
+          {!isLoadingRecipes ? (
             recipes &&
             recipes.map((recipe) => (
               <RecipeComp key={recipe.id} recipe={recipe} />

@@ -1,8 +1,12 @@
 import { Recipe } from "@/store/recipesStore";
 import { Difficulty } from "./types";
-
 export interface ComponentProps {
   children: React.ReactNode;
+}
+export interface MyAlertProps {
+  title: string;
+  description: string;
+  variant: "default" | "destructive";
 }
 
 export interface LinkCompProp extends ComponentProps {

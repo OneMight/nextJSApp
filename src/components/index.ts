@@ -7,6 +7,7 @@ import { FooterCard } from "./ui/FooterCard";
 import { Input } from "./ui/Input";
 import { Skeleton } from "./ui/Skeleton";
 import { Label } from "./ui/Label";
+import * as Alert from "./ui/Alert";
 import * as Form from "./ui/Form";
 import * as Tabs from "./ui/Tabs";
 import * as Pagination from "./ui/Pagination";
@@ -35,4 +36,5 @@ export {
   Skeleton,
   CreateRecipeForm,
   Select,
+  Alert,
 };

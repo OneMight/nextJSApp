@@ -24,7 +24,7 @@ export const ProfileTitle = ({ user }: ProfileTitleProp) => {
 
           <div className="flex flex-row gap-2 items-center text-secondary-text">
             <Image src={LocationIcon} alt="location-icon" />
-            {user.address.country}
+            {user.address?.country}
           </div>
         </div>
 

@@ -4,7 +4,7 @@ import { ScrollRecipes } from "@/layouts/index";
 import { useRecipesStore } from "@/store/recipesStore";
 import { useEffect } from "react";
 export default function Home() {
-  const { fetchRecipes, recipes, isLoading } = useRecipesStore();
+  const { fetchRecipes, recipes, isLoadingRecipes } = useRecipesStore();
 
   useEffect(() => {
     fetchRecipes(10);
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center gap-8 w-full py-4 px-0">
       <HomeSection />
-      <ScrollRecipes recipes={recipes} isLoading={isLoading} />
+      <ScrollRecipes recipes={recipes} isLoading={isLoadingRecipes} />
       <div className="flex flex-col gap-3 w-full items-center justify-center sm:flex-row px-3">
         <FooterCard
           title="Quick & Easy"

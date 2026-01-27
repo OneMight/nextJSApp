@@ -15,13 +15,13 @@ export interface Recipe {
 }
 export interface RecipesState {
   recipes: Recipe[];
-  isLoading: boolean;
+  isLoadingRecipes: boolean;
   savedRecipes: Recipe[];
   error: unknown | null;
   pages: number;
   userRecipes: Recipe[];
   currentRecipe: Recipe | null;
-  setIsLoading: (isLoading: boolean) => void;
+  setisLoadingRecipes: (isLoadingRecipes: boolean) => void;
   fetchRecipes: (limit?: number, skip?: number) => void;
   findRecipe: (search: string, skip: number) => void;
   saveRecipe: (recipe: Recipe) => void;
@@ -32,15 +32,15 @@ export interface RecipesState {
 }
 export const useRecipesStore = create<RecipesState>()((set) => ({
   recipes: [],
-  isLoading: false,
+  isLoadingRecipes: false,
   error: null,
   savedRecipes: [],
   userRecipes: [],
   currentRecipe: null,
   pages: 0,
-  setIsLoading: (isLoading: boolean) => set({ isLoading }),
+  setisLoadingRecipes: (isLoadingRecipes: boolean) => set({ isLoadingRecipes }),
   fetchRecipes: async (limit: number = 0, skip: number = 0) => {
-    set({ isLoading: true });
+    set({ isLoadingRecipes: true });
     try {
       const response = await fetch(
         `https://dummyjson.com/recipes?limit=${limit}&skip=${skip}&sortBy=name`,
@@ -48,35 +48,35 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
       const data = await response.json();
       set({
         recipes: data.recipes,
-        isLoading: false,
+        isLoadingRecipes: false,
         pages: Math.round(data.total / limit),
       });
     } catch (error) {
-      set({ error, isLoading: false });
+      set({ error, isLoadingRecipes: false });
     }
   },
   findRecipe: async (search: string, skip: number, limit = 12) => {
     try {
-      set({ isLoading: true });
+      set({ isLoadingRecipes: true });
       const response = await fetch(
         `https://dummyjson.com/recipes/search?q=${search}&skip=${skip}&limit=${limit}`,
       );
       const data = await response.json();
       set({
         recipes: data.recipes,
-        isLoading: false,
+        isLoadingRecipes: false,
         pages: Math.round(data.total / limit),
       });
     } catch (error) {
-      set({ error, isLoading: false });
+      set({ error, isLoadingRecipes: false });
     }
   },
   getUserRecipes: async () => {
     try {
-      set({ isLoading: true });
+      set({ isLoadingRecipes: true });
       const response = await fetch(`https://dummyjson.com/recipes?limit=3`);
       const data = await response.json();
-      set({ userRecipes: data.recipes, isLoading: false });
+      set({ userRecipes: data.recipes, isLoadingRecipes: false });
     } catch (error) {
       set({ error });
     }
@@ -89,9 +89,9 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
   },
   getRecipeById: async (id: number) => {
     try {
-      set({ isLoading: true });
+      set({ isLoadingRecipes: true });
       const response = await fetch(`https://dummyjson.com/recipes/${id}`);
-      set({ isLoading: false, currentRecipe: await response.json() });
+      set({ isLoadingRecipes: false, currentRecipe: await response.json() });
     } catch (error) {
       set({ error });
     }
