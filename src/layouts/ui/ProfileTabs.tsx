@@ -32,9 +32,14 @@ export const ProfileTabs = () => {
           ))
         )}
       </Tabs.TabsContent>
-      <Tabs.TabsContent className="flex" value="Saved">
+      <Tabs.TabsContent
+        className={savedRecipes.length === 0 ? "flex" : ""}
+        value="Saved"
+      >
         {savedRecipes.length !== 0 ? (
-          <></>
+          savedRecipes.map((recipe) => (
+            <RecipeComp recipe={recipe} key={recipe.id} isSaved />
+          ))
         ) : (
           <p className="font-bold text-3xl w-full text-center">
             You didn&apos;t save any recipe

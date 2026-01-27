@@ -2,10 +2,25 @@ import { cn } from "@/lib/utils";
 import { KcalIcon, TimeIcon } from "@/shared/images";
 import Image from "next/image";
 import { RecipeProps } from "@/types/interfaces";
+import Link from "next/link";
+import { ROUTES } from "@/shared/routes";
+import { Button } from "../Button";
+import { Trash2 } from "lucide-react";
+import { MouseEvent } from "react";
+import { useRecipesStore } from "@/store/recipesStore";
 
-export const RecipeComp = ({ recipe }: RecipeProps) => {
+export const RecipeComp = ({ recipe, isSaved }: RecipeProps) => {
+  const { removeFromSaved } = useRecipesStore();
+  const handleDeleteFromSaved = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    removeFromSaved(recipe.id);
+  };
   return (
-    <article className="w-67.5 shrink-0 relative bg-white-fg rounded-2xl hover:drop-shadow-md transition hover:cursor-pointer group">
+    <Link
+      href={`${ROUTES.RECIPES}/${recipe.id}`}
+      className="w-67.5 shrink-0 relative bg-white-fg rounded-2xl hover:drop-shadow-md transition hover:cursor-pointer group"
+    >
       <div className="overflow-hidden">
         <Image
           className="rounded-t-2xl w-auto group-hover:scale-110 transition-transform duration-300"
@@ -15,7 +30,15 @@ export const RecipeComp = ({ recipe }: RecipeProps) => {
           alt={recipe.name}
         />
       </div>
-
+      {isSaved && (
+        <Button
+          size="icon"
+          className="absolute top-3 right-3 bg-white z-10 hover:bg-orange"
+          onClick={handleDeleteFromSaved}
+        >
+          <Trash2 className="w-4 h-4 text-gray-600 hover:text-difficult-hard" />
+        </Button>
+      )}
       <p
         className={cn(
           "absolute top-3 left-3 bg-white/30 backdrop-blur-sm p-1 rounded-2xl w-20 text-center text-sm",
@@ -49,6 +72,6 @@ export const RecipeComp = ({ recipe }: RecipeProps) => {
           </p>
         </div>
       </div>
-    </article>
+    </Link>
   );
 };

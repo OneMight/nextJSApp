@@ -10,6 +10,9 @@ import KcalIcon from "@/assets/kcal-icon.svg";
 import WhiteDirectIcon from "@/assets/white-direct-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import SettingsIcon from "@/assets/settings-icon.svg";
+import LikeIcon from "@/assets/like-icon.svg";
+import ServingsIcon from "@/assets/servings-icon.svg";
+import SuccessIcon from "@/assets/success-icon.svg";
 export {
   LogoIcon,
   ExitIcon,
@@ -23,4 +26,7 @@ export {
   WhiteDirectIcon,
   LocationIcon,
   SettingsIcon,
+  LikeIcon,
+  ServingsIcon,
+  SuccessIcon,
 };
