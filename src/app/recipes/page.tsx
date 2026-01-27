@@ -1,3 +1,4 @@
+"use client";
 import { NavSide } from "@/layouts";
 import { RecipesView } from "@/layouts";
 export default function Page() {

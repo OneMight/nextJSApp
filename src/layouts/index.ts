@@ -8,6 +8,7 @@ import { ProfileTitleSkeleton } from "./ui/ProfileTitle/ProfileTitleSkeleton";
 import { EditProfileDrawer } from "./ui/EditProfileDrawer";
 import { ProfileTabs } from "./ui/ProfileTabs";
 import { CreateRecipe } from "./ui/CreateRecipe";
+import { UnauthUser } from "./ui/UnauthUser";
 export {
   NavSide,
   LoginForm,
@@ -19,4 +20,5 @@ export {
   ProfileTitleSkeleton,
   ProfileTabs,
   CreateRecipe,
+  UnauthUser,
 };

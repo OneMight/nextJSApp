@@ -1,5 +1,7 @@
 import { ChangeCredintionalsType } from "@/types/types";
 import { handleGetToken } from "@/utils/cookiesFunc";
+import { deleteCookieToken } from "@/utils/cookiesFunc";
+
 import { create } from "zustand";
 type AdressData = {
   country: string;
@@ -45,7 +47,7 @@ export const useUserStore = create<UserData>()((set) => ({
         body: JSON.stringify({
           username,
           password,
-          expiresInMins: 60 * 2,
+          expiresInMins: 1,
         }),
         credentials: "omit",
       });
@@ -71,10 +73,14 @@ export const useUserStore = create<UserData>()((set) => ({
       });
       set({ user: await response.json(), isLoading: false });
     } catch (error) {
-      set({ error });
+      deleteCookieToken("accessToken");
+      deleteCookieToken("refreshToken");
+      set({ error, isLoading: false });
     }
   },
-  logout: () => {
+  logout: async () => {
+    deleteCookieToken("accessToken");
+    deleteCookieToken("refreshToken");
     set({ user: null });
   },
   updateUser: async (userProp: ChangeCredintionalsType) => {

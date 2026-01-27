@@ -11,7 +11,6 @@ import {
   RecipesIcon,
 } from "@/shared/images";
 import { useUserStore } from "@/store/userStore";
-import { deleteCookieToken } from "@/utils/cookiesFunc";
 import { useEffect } from "react";
 export const NavSide = () => {
   const { user, getAuth, logout } = useUserStore();
@@ -19,8 +18,6 @@ export const NavSide = () => {
     getAuth();
   }, [getAuth]);
   const handleLogOut = () => {
-    deleteCookieToken("accessToken");
-    deleteCookieToken("refreshToken");
     logout();
     redirect(ROUTES.HOME);
   };

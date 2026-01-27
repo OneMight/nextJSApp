@@ -13,7 +13,6 @@ export const CreateRecipeForm = () => {
   const [newRecipe, setNewRecipe] = useState<Recipe>({} as Recipe);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(newRecipe);
     createRecipe(newRecipe);
   };
   const handleSetNewRecipe = (e: ChangeEvent<HTMLInputElement>) => {

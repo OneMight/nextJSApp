@@ -1,13 +1,29 @@
+"use client";
+
 import { LoginForm } from "@/layouts/index";
 import { NavSide } from "@/layouts";
 import { RecipesIcon } from "@/shared/images";
 import Image from "next/image";
+import { useUserStore } from "@/store/userStore";
+import { MyAlert } from "@/components/ui/MyAlert";
 
 export default function Login() {
+  const { error } = useUserStore();
+  if (!!error) {
+    console.log(error);
+  }
   return (
-    <main className="flex flex-row xlg:justify-center xlg:items-center h-full">
+    <main className="flex flex-row xlg:justify-center xlg:items-center h-full ">
       <NavSide />
-      <div className="flex flex-col items-center justify-center w-full drop-shadow-xl mx-3">
+
+      <div className="flex flex-col items-center justify-center w-full drop-shadow-xl mx-3 h-screen relative">
+        {!!error && (
+          <MyAlert
+            title="Authorization error"
+            variant="destructive"
+            description="Your creadentionals is invalid. Try again."
+          />
+        )}
         <div className="bg-orange/5 rounded-t-2xl flex flex-col items-center justify-center gap-4 min-w-75 w-full max-w-100 p-5">
           <div className="bg-orange rounded-2xl size-16 flex items-center justify-center shadow-2xl">
             <Image width={40} src={RecipesIcon} alt="logo-icon" />
