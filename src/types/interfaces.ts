@@ -11,6 +11,7 @@ export interface MyAlertProps {
 
 export interface LinkCompProp extends ComponentProps {
   href: string;
+  isMobile?: boolean;
 }
 
 export interface RecipeProps {

@@ -22,7 +22,7 @@ export const NavSide = () => {
     redirect(ROUTES.HOME);
   };
   return (
-    <aside className="hidden xlg:flex flex-col h-screen justify-between items-center w-60 bg-white-fg sticky left-0 top-0 py-3 px-4">
+    <aside className="flex flex-col h-screen justify-between items-center w-60 bg-white-fg sticky left-0 top-0 py-3 px-4">
       <div className="flex flex-col">
         <div className="my-5 text-2xl flex flex-row items-center gap-2">
           <Image

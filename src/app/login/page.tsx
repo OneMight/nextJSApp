@@ -1,22 +1,21 @@
 "use client";
 
 import { LoginForm } from "@/layouts/index";
-import { NavSide } from "@/layouts";
 import { RecipesIcon } from "@/shared/images";
 import Image from "next/image";
 import { useUserStore } from "@/store/userStore";
 import { MyAlert } from "@/components/ui/MyAlert";
+import { cn } from "@/lib/utils";
 
 export default function Login() {
   const { error } = useUserStore();
   if (!!error) {
     console.log(error);
   }
-  return (
-    <main className="flex flex-row xlg:justify-center xlg:items-center h-full ">
-      <NavSide />
 
-      <div className="flex flex-col items-center justify-center w-full drop-shadow-xl mx-3 h-screen relative">
+  return (
+    <main className={cn("flex justify-center items-center h-full w-full")}>
+      <div className="flex flex-col items-center justify-center w-full drop-shadow-xl h-screen relative">
         {!!error && (
           <MyAlert
             title="Authorization error"

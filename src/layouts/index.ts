@@ -9,6 +9,7 @@ import { EditProfileDrawer } from "./ui/EditProfileDrawer";
 import { ProfileTabs } from "./ui/ProfileTabs";
 import { CreateRecipe } from "./ui/CreateRecipe";
 import { UnauthUser } from "./ui/UnauthUser";
+import { MobileBar } from "./ui/MobileBar";
 export {
   NavSide,
   LoginForm,
@@ -21,4 +22,5 @@ export {
   ProfileTabs,
   CreateRecipe,
   UnauthUser,
+  MobileBar,
 };

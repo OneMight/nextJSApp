@@ -47,7 +47,7 @@ export const useUserStore = create<UserData>()((set) => ({
         body: JSON.stringify({
           username,
           password,
-          expiresInMins: 1,
+          expiresInMins: 60 * 2,
         }),
         credentials: "omit",
       });
