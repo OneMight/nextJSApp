@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 export const RecipeSkeleton = () => {
   return (
-    <article className="w-67.5 shrink-0 relative bg-white-fg rounded-2xl overflow-hidden">
+    <article className="w-67.5 h-97.5 shrink-0 relative bg-white-fg rounded-2xl overflow-hidden">
       <Skeleton className="w-full h-45 rounded-t-2xl rounded-b-none bg-slate-200/80" />
 
       <Skeleton className="absolute top-3 left-3 w-20 h-6 rounded-2xl bg-slate-200/80" />

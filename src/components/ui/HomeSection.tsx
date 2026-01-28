@@ -31,8 +31,9 @@ export const HomeSection = () => {
         </Button>
       </div>
       <Image
-        className="absolute right-0 top-0 sm:block hidden"
+        className="absolute right-0 top-0 w-auto sm:block hidden"
         width={300}
+        height={300}
         alt="icon"
         src={SectionIcon}
       />

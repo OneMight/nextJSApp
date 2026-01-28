@@ -17,12 +17,14 @@ export interface RecipesState {
   recipes: Recipe[];
   isLoadingRecipes: boolean;
   savedRecipes: Recipe[];
+  allRecipes: Recipe[];
   error: unknown | null;
   pages: number;
   userRecipes: Recipe[];
   currentRecipe: Recipe | null;
   setisLoadingRecipes: (isLoadingRecipes: boolean) => void;
   fetchRecipes: (limit?: number, skip?: number) => void;
+  fetchAllRecipes: (limit?: number) => void;
   findRecipe: (search: string, skip: number) => void;
   saveRecipe: (recipe: Recipe) => void;
   getUserRecipes: () => void;
@@ -33,6 +35,7 @@ export interface RecipesState {
 export const useRecipesStore = create<RecipesState>()((set) => ({
   recipes: [],
   isLoadingRecipes: false,
+  allRecipes: [],
   error: null,
   savedRecipes: [],
   userRecipes: [],
@@ -100,5 +103,20 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
     set((state) => ({
       savedRecipes: state.savedRecipes.filter((elem) => elem.id !== id),
     }));
+  },
+  fetchAllRecipes: async (limit = 50) => {
+    set({ isLoadingRecipes: true });
+    try {
+      const response = await fetch(
+        `https://dummyjson.com/recipes?limit=${limit}`,
+      );
+      const data = await response.json();
+      set({
+        allRecipes: data.recipes,
+        isLoadingRecipes: false,
+      });
+    } catch (error) {
+      set({ error, isLoadingRecipes: false });
+    }
   },
 }));

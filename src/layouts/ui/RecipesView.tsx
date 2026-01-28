@@ -7,8 +7,15 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { RecipesPagination } from "./RecipesPagination";
 import { useUserStore } from "@/store/userStore";
 export const RecipesView = () => {
-  const { fetchRecipes, recipes, isLoadingRecipes, findRecipe, pages } =
-    useRecipesStore();
+  const {
+    fetchRecipes,
+    recipes,
+    isLoadingRecipes,
+    allRecipes,
+    findRecipe,
+    pages,
+    fetchAllRecipes,
+  } = useRecipesStore();
   const { isLoading } = useUserStore();
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState<string>("");
@@ -26,16 +33,19 @@ export const RecipesView = () => {
   }, [search]);
   useEffect(() => {
     if (!isLoading) {
+      fetchAllRecipes();
       findRecipe(debouncedSearch, skip);
     }
-  }, [debouncedSearch, findRecipe, skip, isLoading]);
+  }, [debouncedSearch, findRecipe, skip, isLoading, fetchAllRecipes]);
   const handleFetchRecipes = () => {
     setTabValue(null);
     fetchRecipes(12, skip);
   };
   const handleGetRecipesByDifficulty = (difficult: Difficulty) => {
     setTabValue(difficult);
-    setFilteredRecipes(recipes.filter((elem) => elem.difficulty === difficult));
+    setFilteredRecipes(
+      allRecipes.filter((elem) => elem.difficulty === difficult),
+    );
   };
   const handleSetPage = (index: number) => {
     setSkip(12 * index);

@@ -2,7 +2,7 @@
 import { ROUTES } from "@/shared/routes";
 import { Button, LinkSide } from "@/components/index";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import {
   ExitIcon,
   HomeIcon,
@@ -14,15 +14,16 @@ import { useUserStore } from "@/store/userStore";
 import { useEffect } from "react";
 export const NavSide = () => {
   const { user, getAuth, logout } = useUserStore();
+  const pathName = usePathname();
   useEffect(() => {
     getAuth();
-  }, [getAuth]);
+  }, [getAuth, pathName]);
   const handleLogOut = () => {
     logout();
     redirect(ROUTES.HOME);
   };
   return (
-    <aside className="flex flex-col h-screen justify-between items-center w-60 bg-white-fg sticky left-0 top-0 py-3 px-4">
+    <aside className="hidden xlg:flex flex-col h-screen justify-between items-center w-60 bg-white-fg sticky left-0 top-0 py-3 px-4">
       <div className="flex flex-col">
         <div className="my-5 text-2xl flex flex-row items-center gap-2">
           <Image

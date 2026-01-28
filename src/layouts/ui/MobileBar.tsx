@@ -3,13 +3,15 @@
 import { Button, LinkSide } from "@/components";
 import { ROUTES } from "@/shared/routes";
 import { useUserStore } from "@/store/userStore";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { useEffect } from "react";
 export const MobileBar = () => {
   const { user, logout, getAuth } = useUserStore();
+  const pathName = usePathname();
+
   useEffect(() => {
     getAuth();
-  }, [getAuth]);
+  }, [getAuth, pathName]);
   const handleLogOut = () => {
     logout();
     redirect(ROUTES.HOME);
@@ -17,7 +19,7 @@ export const MobileBar = () => {
   return (
     <>
       <div className="h-16"></div>
-      <div className="flex flex-row w-full fixed bg-white-fg bottom-0 left-0 py-3 z-10">
+      <nav className="flex xlg:hidden flex-row w-full fixed bg-white-fg bottom-0 left-0 py-3 z-10">
         <LinkSide isMobile href={ROUTES.HOME}>
           Home
         </LinkSide>
@@ -41,7 +43,7 @@ export const MobileBar = () => {
             Log out
           </Button>
         )}
-      </div>
+      </nav>
     </>
   );
 };

@@ -36,7 +36,7 @@ export const RecipeComp = ({ recipe, isSaved }: RecipeProps) => {
           className="absolute top-3 right-3 bg-white z-10 hover:bg-orange"
           onClick={handleDeleteFromSaved}
         >
-          <Trash2 className="w-4 h-4 text-gray-600 hover:text-difficult-hard" />
+          <Trash2 className="w-4 h-4  text-gray-600 hover:text-difficult-hard" />
         </Button>
       )}
       <p
@@ -57,17 +57,12 @@ export const RecipeComp = ({ recipe, isSaved }: RecipeProps) => {
       <div className="flex flex-col gap-2 p-4">
         <h2>{recipe.name}</h2>
         <div className="flex flex-row w-full items-center justify-between">
-          <p className="flex flex-row gap-1">
-            <Image
-              src={TimeIcon}
-              width={16}
-              className="w-auto"
-              alt="time-icon"
-            />
+          <p className="flex flex-row items-center gap-1">
+            <Image className="w-4 h-4" src={TimeIcon} alt="cook time" />
             {recipe.cookTimeMinutes} minutes
           </p>
-          <p className="flex flex-row gap-1">
-            <Image src={KcalIcon} className="w-auto" alt="kcal-icon" />
+          <p className="flex flex-row gap-1 items-center">
+            <Image src={KcalIcon} className="w-4 h-4" alt="kcal" />
             {recipe.caloriesPerServing}kcal/several
           </p>
         </div>
