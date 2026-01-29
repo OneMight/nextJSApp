@@ -1,5 +1,3 @@
-"use client";
-
 import "./globals.css";
 import { MobileBar, NavSide } from "@/layouts";
 export default function RootLayout({

@@ -1,4 +1,3 @@
-"use client";
 import { RecipesView } from "@/layouts";
 export default function Page() {
   return (
