@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { KcalIcon, Plug, TimeIcon } from "@/shared/images";
+import { KcalIcon, TimeIcon } from "@/shared/images";
 import Image from "next/image";
 import { RecipeProps } from "@/types/interfaces";
 import Link from "next/link";
