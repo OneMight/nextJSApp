@@ -1,3 +1,4 @@
+"use client";
 import { Pagination } from "@/components";
 interface RecipesPaginationProps {
   pages: number;
@@ -6,6 +7,7 @@ interface RecipesPaginationProps {
   handlePreviousPage: () => void;
   handleSetPage: (index: number) => void;
 }
+
 export const RecipesPagination = ({
   pages,
   handlePreviousPage,

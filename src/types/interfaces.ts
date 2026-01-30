@@ -45,3 +45,13 @@ export interface SelectDifficultProps {
 export interface RecipesResnose {
   recipes: Recipe[];
 }
+export interface RecipesInputProps {
+  tabValue: Difficulty | null;
+  setSkip: (value: number) => void;
+  setDebouncedSearch: (value: string) => void;
+  search: string;
+  setSearch: (value: string) => void;
+}
+export interface FilteredRecipesProps {
+  tabValue: string;
+}

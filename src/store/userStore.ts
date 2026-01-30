@@ -41,7 +41,7 @@ export const useUserStore = create<UserData>()((set) => ({
   ): Promise<Tokens | undefined> => {
     try {
       set({ isLoading: true });
-      const response = await fetch("https://dummyjson.com/auth/login", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API}auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -64,7 +64,7 @@ export const useUserStore = create<UserData>()((set) => ({
     try {
       set({ isLoading: true });
       const token = handleGetToken("accessToken");
-      const response = await fetch("https://dummyjson.com/auth/me", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API}auth/me`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ export const useUserStore = create<UserData>()((set) => ({
   updateUser: async (userProp: ChangeCredintionalsType) => {
     try {
       set((state) => ({ user: { ...state.user, ...userProp } as User }));
-      await fetch(`https://dummyjson.com/users/${userProp.id}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API}users/${userProp.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

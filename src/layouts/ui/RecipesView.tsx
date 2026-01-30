@@ -1,61 +1,37 @@
 "use client";
-import { Button, Input, RecipeComp, RecipeSkeleton, Tabs } from "@/components";
-import { cn } from "@/lib/utils";
+import { RecipeComp, RecipesInput, RecipeSkeleton, Tabs } from "@/components";
 import { Recipe, useRecipesStore } from "@/store/recipesStore";
 import { Difficulty } from "@/types/types";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RecipesPagination } from "./RecipesPagination";
-import { useUserStore } from "@/store/userStore";
-import { CircleXIcon } from "lucide-react";
 export const RecipesView = () => {
-  const {
-    fetchRecipes,
-    recipes,
-    isLoadingRecipes,
-    allRecipes,
-    findRecipe,
-    pages,
-    fetchAllRecipes,
-  } = useRecipesStore();
-  const { isLoading } = useUserStore();
+  const { fetchRecipes, recipes, isLoadingRecipes, findRecipe, pages } =
+    useRecipesStore();
+  const [search, setSearch] = useState<string>("");
+
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [skip, setSkip] = useState<number>(0);
-  const [search, setSearch] = useState<string>("");
   const [tabValue, setTabValue] = useState<Difficulty | null>(null);
+
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 300);
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [search]);
-  useEffect(() => {
-    if (!isLoading) {
-      fetchAllRecipes();
-      findRecipe(debouncedSearch, skip);
-    }
-  }, [debouncedSearch, findRecipe, skip, isLoading, fetchAllRecipes]);
+    findRecipe(debouncedSearch, skip);
+  }, [debouncedSearch, findRecipe, skip]);
   const handleFetchRecipes = () => {
     setTabValue(null);
-    fetchRecipes(12, skip);
+    findRecipe(debouncedSearch, skip);
   };
-  const handleGetRecipesByDifficulty = (difficult: Difficulty) => {
+  const handleGetRecipesByDifficulty = async (difficult: Difficulty) => {
     setTabValue(difficult);
-    setFilteredRecipes(
-      allRecipes.filter((elem) => elem.difficulty === difficult),
-    );
+    fetchRecipes();
+    setFilteredRecipes(recipes.filter((elem) => elem.difficulty === difficult));
   };
   const handleSetPage = (index: number) => {
     setSkip(12 * index);
     setCurrentPage(index);
   };
-  const handleSetSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    setSkip(0);
-  };
+
   const handleNextPage = () => {
     setCurrentPage((prev) => prev + 1);
     setSkip((prev) => prev + 12);
@@ -65,27 +41,14 @@ export const RecipesView = () => {
     setSkip((prev) => prev - 12);
   };
   return (
-    <div className="flex flex-col gap-10  w-full">
-      <div className="w-full relative  max-w-200">
-        <Input
-          value={search}
-          onChange={(e) => handleSetSearch(e)}
-          placeholder="Search recipes..."
-          className={cn(
-            "h-15 bg-white-fg pl-10 max-w-200",
-            `${!!tabValue && "hidden"}`,
-          )}
-        />
-
-        <Button
-          onClick={() => setSearch("")}
-          size={"icon"}
-          className="absolute top-3 right-2 hover:bg-orange"
-        >
-          <CircleXIcon />
-        </Button>
-      </div>
-
+    <div className="flex flex-col gap-10 justify-between w-full">
+      <RecipesInput
+        tabValue={tabValue}
+        setSkip={setSkip}
+        search={search}
+        setSearch={setSearch}
+        setDebouncedSearch={setDebouncedSearch}
+      />
       <Tabs.Tabs
         defaultValue={"All"}
         className="w-full flex flex-col items-center sm:items-start gap-4"
@@ -113,12 +76,15 @@ export const RecipesView = () => {
             Hard
           </Tabs.TabsTrigger>
         </Tabs.TabsList>
-        <Tabs.TabsContent value="All">
+        <Tabs.TabsContent value={"All"}>
           {!isLoadingRecipes ? (
-            recipes &&
-            recipes.map((recipe) => (
-              <RecipeComp key={recipe.id} recipe={recipe} />
-            ))
+            recipes.length != 0 || search == "" ? (
+              recipes.map((recipe) => (
+                <RecipeComp key={recipe.id} recipe={recipe} />
+              ))
+            ) : (
+              <p>Nothing finded</p>
+            )
           ) : (
             <>
               {Array.from({ length: 8 }, (_, index) => (
@@ -128,16 +94,20 @@ export const RecipesView = () => {
           )}
         </Tabs.TabsContent>
         <Tabs.TabsContent value={tabValue as string}>
-          {filteredRecipes.length !== 0 ? (
-            filteredRecipes.map((recipe) => (
-              <RecipeComp key={recipe.id} recipe={recipe} />
-            ))
+          {!isLoadingRecipes ? (
+            filteredRecipes.length !== 0 ? (
+              filteredRecipes.map((recipe) => (
+                <RecipeComp key={recipe.id} recipe={recipe} />
+              ))
+            ) : (
+              <p>There is no {tabValue} recipes</p>
+            )
           ) : (
-            <p>There is no {tabValue} recipes</p>
+            <></>
           )}
         </Tabs.TabsContent>
       </Tabs.Tabs>
-      {!tabValue && (
+      {typeof tabValue != null && recipes.length != 0 && pages > 1 && (
         <RecipesPagination
           pages={pages}
           handleNextPage={handleNextPage}
