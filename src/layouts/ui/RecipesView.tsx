@@ -1,11 +1,12 @@
 "use client";
-import { Input, RecipeComp, RecipeSkeleton, Tabs } from "@/components";
+import { Button, Input, RecipeComp, RecipeSkeleton, Tabs } from "@/components";
 import { cn } from "@/lib/utils";
 import { Recipe, useRecipesStore } from "@/store/recipesStore";
 import { Difficulty } from "@/types/types";
 import { ChangeEvent, useEffect, useState } from "react";
 import { RecipesPagination } from "./RecipesPagination";
 import { useUserStore } from "@/store/userStore";
+import { CircleXIcon } from "lucide-react";
 export const RecipesView = () => {
   const {
     fetchRecipes,
@@ -64,16 +65,27 @@ export const RecipesView = () => {
     setSkip((prev) => prev - 12);
   };
   return (
-    <div className="flex flex-col gap-10 w-full">
-      <Input
-        value={search}
-        onChange={(e) => handleSetSearch(e)}
-        placeholder="Search recipes..."
-        className={cn(
-          "h-15 bg-white-fg pl-10 max-w-200",
-          `${!!tabValue && "hidden"}`,
-        )}
-      />
+    <div className="flex flex-col gap-10  w-full">
+      <div className="w-full relative  max-w-200">
+        <Input
+          value={search}
+          onChange={(e) => handleSetSearch(e)}
+          placeholder="Search recipes..."
+          className={cn(
+            "h-15 bg-white-fg pl-10 max-w-200",
+            `${!!tabValue && "hidden"}`,
+          )}
+        />
+
+        <Button
+          onClick={() => setSearch("")}
+          size={"icon"}
+          className="absolute top-3 right-2 hover:bg-orange"
+        >
+          <CircleXIcon />
+        </Button>
+      </div>
+
       <Tabs.Tabs
         defaultValue={"All"}
         className="w-full flex flex-col items-center sm:items-start gap-4"
