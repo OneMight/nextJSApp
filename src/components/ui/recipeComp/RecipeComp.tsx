@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { KcalIcon, TimeIcon } from "@/shared/images";
 import Image from "next/image";

@@ -3,15 +3,10 @@
 import { Button, LinkSide } from "@/components";
 import { ROUTES } from "@/shared/routes";
 import { useUserStore } from "@/store/userStore";
-import { redirect, usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { redirect } from "next/navigation";
 export const MobileBar = () => {
-  const { user, logout, getAuth } = useUserStore();
-  const pathName = usePathname();
+  const { user, logout } = useUserStore();
 
-  useEffect(() => {
-    getAuth();
-  }, [getAuth, pathName]);
   const handleLogOut = () => {
     logout();
     redirect(ROUTES.HOME);

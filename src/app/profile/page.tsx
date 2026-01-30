@@ -2,13 +2,9 @@
 import { ProfileTabs, ProfileTitle, UnauthUser } from "@/layouts";
 import { ProfileTitleSkeleton } from "@/layouts/index";
 import { useUserStore } from "@/store/userStore";
-import { useEffect } from "react";
 
 export default function Profile() {
-  const { user, getAuth, isLoading } = useUserStore();
-  useEffect(() => {
-    getAuth();
-  }, [getAuth]);
+  const { user, isLoading } = useUserStore();
 
   if (user?.message) {
     return <UnauthUser />;

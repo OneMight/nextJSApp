@@ -1,21 +1,10 @@
-"use client";
-
 import { FooterCard, HomeSection } from "@/components";
 import { ScrollRecipes } from "@/layouts/index";
-import { useRecipesStore } from "@/store/recipesStore";
-import { useEffect } from "react";
-
-export default function Page() {
-  const { fetchRecipes, recipes, isLoadingRecipes } = useRecipesStore();
-
-  useEffect(() => {
-    fetchRecipes(10);
-  }, [fetchRecipes]);
-
+export default async function Page() {
   return (
-    <div className="flex flex-col justify-center items-center gap-8 w-full py-4 px-0">
+    <div className="flex flex-col justify-start items-center gap-8 w-full py-4 px-0">
       <HomeSection />
-      <ScrollRecipes recipes={recipes} isLoading={isLoadingRecipes} />
+      <ScrollRecipes />
       <div className="flex flex-col gap-3 w-full items-center justify-center sm:flex-row px-3">
         <FooterCard
           title="Quick & Easy"

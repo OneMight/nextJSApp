@@ -47,6 +47,10 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
     try {
       const response = await fetch(
         `https://dummyjson.com/recipes?limit=${limit}&skip=${skip}&sortBy=name`,
+        {
+          cache: "force-cache",
+          next: { tags: ["limit", "skip"], revalidate: 60 * 3 },
+        },
       );
       const data = await response.json();
       set({
@@ -63,6 +67,10 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
       set({ isLoadingRecipes: true });
       const response = await fetch(
         `https://dummyjson.com/recipes/search?q=${search}&skip=${skip}&limit=${limit}`,
+        {
+          cache: "force-cache",
+          next: { tags: ["search", "skip", "limit"], revalidate: 60 * 60 },
+        },
       );
       const data = await response.json();
       set({
@@ -109,6 +117,10 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
     try {
       const response = await fetch(
         `https://dummyjson.com/recipes?limit=${limit}`,
+        {
+          cache: "force-cache",
+          next: { revalidate: 60 * 3 },
+        },
       );
       const data = await response.json();
       set({

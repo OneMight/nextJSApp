@@ -1,3 +1,5 @@
+"use client";
+
 import { SectionIcon } from "@/shared/images";
 import Image from "next/image";
 import { Button } from "./Button";

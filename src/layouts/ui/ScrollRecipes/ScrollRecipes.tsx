@@ -3,11 +3,14 @@ import Image from "next/image";
 import { RecipeComp } from "@/components";
 import { DirectIcon } from "@/shared/images";
 import { ROUTES } from "@/shared/routes";
-import { RecipeSkeleton } from "@/components/index";
-import { ScrollRecipesProps } from "@/types/interfaces";
-export const ScrollRecipes = ({ recipes, isLoading }: ScrollRecipesProps) => {
+import { Recipe } from "@/store/recipesStore";
+import { Suspense } from "react";
+import { ScrollRecipesSkeleton } from "./ScrollRecipesSkeleton";
+import { FetchRecipes } from "@/shared/queries";
+export const ScrollRecipes = async () => {
+  const { recipes } = await FetchRecipes();
   return (
-    <article className=" flex flex-col w-full items-start justify-center gap-2 p-2 px-4 max-w-360">
+    <article className="min-h-115.5 flex flex-col w-full items-start justify-start gap-2 p-2 px-4 max-w-360">
       <div className="w-full flex flex-col sm:flex-row items-start gap-2 sm:items-center justify-between">
         <div>
           <h2 className="font-bold">Trending Now</h2>
@@ -21,19 +24,13 @@ export const ScrollRecipes = ({ recipes, isLoading }: ScrollRecipesProps) => {
         </Link>
       </div>
 
-      <div className=" overflow-x-auto no-scrollbar w-full">
+      <div className="overflow-x-auto w-full">
         <div className="flex flex-row gap-4 no-scrollbar py-4 w-100">
-          {!isLoading ? (
-            recipes.map((recipe) => (
+          <Suspense fallback={<ScrollRecipesSkeleton />}>
+            {recipes.map((recipe: Recipe) => (
               <RecipeComp key={recipe.id} recipe={recipe} />
-            ))
-          ) : (
-            <>
-              {Array.from({ length: 5 }, (_, index) => (
-                <RecipeSkeleton key={index} />
-              ))}
-            </>
-          )}
+            ))}
+          </Suspense>
         </div>
       </div>
     </article>

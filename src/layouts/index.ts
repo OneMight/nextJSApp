@@ -1,7 +1,7 @@
 import { NavSide } from "./ui/NavSide";
 import { RecipesView } from "./ui/RecipesView";
 import { LoginForm } from "./ui/LoginForm";
-import { ScrollRecipes } from "./ui/ScrollRecipes";
+import { ScrollRecipes } from "./ui/ScrollRecipes/ScrollRecipes";
 import { RecipesPagination } from "./ui/RecipesPagination";
 import { ProfileTitle } from "./ui/ProfileTitle/ProfileTitle";
 import { ProfileTitleSkeleton } from "./ui/ProfileTitle/ProfileTitleSkeleton";
@@ -10,6 +10,7 @@ import { ProfileTabs } from "./ui/ProfileTabs";
 import { CreateRecipe } from "./ui/CreateRecipe";
 import { UnauthUser } from "./ui/UnauthUser";
 import { MobileBar } from "./ui/MobileBar";
+import { ScrollRecipesSkeleton } from "./ui/ScrollRecipes/ScrollRecipesSkeleton";
 export {
   NavSide,
   LoginForm,
@@ -23,4 +24,5 @@ export {
   CreateRecipe,
   UnauthUser,
   MobileBar,
+  ScrollRecipesSkeleton,
 };

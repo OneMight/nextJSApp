@@ -12,7 +12,7 @@ export const LoginForm = () => {
   const form = useForm();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, setError } = useUserStore();
+  const { login, setError, getAuth } = useUserStore();
   const handleSetUsername = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
@@ -25,6 +25,7 @@ export const LoginForm = () => {
     if (tokens?.accessToken && tokens?.refreshToken) {
       document.cookie = `accessToken=${tokens.accessToken}`;
       document.cookie = `refreshToken=${tokens.refreshToken}`;
+      getAuth();
       redirect(ROUTES.HOME);
     } else {
       setError("Something went wrong");

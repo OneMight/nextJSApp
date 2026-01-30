@@ -2,7 +2,7 @@
 import { ROUTES } from "@/shared/routes";
 import { Button, LinkSide } from "@/components/index";
 import Image from "next/image";
-import { redirect, usePathname } from "next/navigation";
+import { redirect } from "next/navigation";
 import {
   ExitIcon,
   HomeIcon,
@@ -11,13 +11,9 @@ import {
   RecipesIcon,
 } from "@/shared/images";
 import { useUserStore } from "@/store/userStore";
-import { useEffect } from "react";
 export const NavSide = () => {
-  const { user, getAuth, logout } = useUserStore();
-  const pathName = usePathname();
-  useEffect(() => {
-    getAuth();
-  }, [getAuth, pathName]);
+  const { user, logout } = useUserStore();
+
   const handleLogOut = () => {
     logout();
     redirect(ROUTES.HOME);

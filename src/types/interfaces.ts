@@ -20,7 +20,6 @@ export interface RecipeProps {
 }
 export interface ScrollRecipesProps {
   recipes: Recipe[];
-  isLoading: boolean;
 }
 export interface FooterCardProps extends ComponentProps {
   title: string;
@@ -41,4 +40,8 @@ export interface SelectDifficultProps {
   onValueChange: (value: Difficulty) => void;
   value?: string;
   defaultValue?: string;
+}
+
+export interface RecipesResnose {
+  recipes: Recipe[];
 }
