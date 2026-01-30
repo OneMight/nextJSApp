@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { KcalIcon, TimeIcon } from "@/shared/images";
+import { KcalIcon, Plug, TimeIcon } from "@/shared/images";
 import Image from "next/image";
 import { RecipeProps } from "@/types/interfaces";
 import Link from "next/link";
@@ -27,7 +27,7 @@ export const RecipeComp = ({ recipe, isSaved }: RecipeProps) => {
           className="rounded-t-2xl w-auto group-hover:scale-110 transition-transform duration-300"
           width={270}
           height={270}
-          src={recipe.image}
+          src={recipe.image || "https://dummyimage.com/540"}
           alt={recipe.name}
         />
       </div>

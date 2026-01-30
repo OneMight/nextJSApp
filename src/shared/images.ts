@@ -13,6 +13,7 @@ import SettingsIcon from "@/assets/settings-icon.svg";
 import LikeIcon from "@/assets/like-icon.svg";
 import ServingsIcon from "@/assets/servings-icon.svg";
 import SuccessIcon from "@/assets/success-icon.svg";
+import Plug from "@/assets/background.png";
 export {
   LogoIcon,
   ExitIcon,
@@ -29,4 +30,5 @@ export {
   LikeIcon,
   ServingsIcon,
   SuccessIcon,
+  Plug,
 };
