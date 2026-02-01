@@ -23,7 +23,7 @@ export const RecipesInput = ({
   }, [search, setDebouncedSearch]);
   const handleSetSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    setSkip(0);
+    setSkip?.(0);
   };
   return (
     <div

@@ -22,7 +22,6 @@ export interface RecipesState {
   userRecipes: Recipe[];
   currentRecipe: Recipe | null;
   setisLoadingRecipes: (isLoadingRecipes: boolean) => void;
-  fetchRecipes: (limit?: number, skip?: number) => void;
   findRecipe: (search: string, skip: number) => void;
   saveRecipe: (recipe: Recipe) => void;
   getUserRecipes: () => void;
@@ -40,22 +39,6 @@ export const useRecipesStore = create<RecipesState>()((set) => ({
   currentRecipe: null,
   pages: 0,
   setisLoadingRecipes: (isLoadingRecipes: boolean) => set({ isLoadingRecipes }),
-  fetchRecipes: async (limit: number = 50, skip: number = 0) => {
-    set({ isLoadingRecipes: true });
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API}recipes?skip=${skip}&limit=${limit}&sortBy=name`,
-      );
-      const data = await response.json();
-      set({
-        recipes: data.recipes,
-        isLoadingRecipes: false,
-        pages: Math.round(data.total / limit),
-      });
-    } catch (error) {
-      set({ error, isLoadingRecipes: false });
-    }
-  },
   findRecipe: async (search: string, skip: number, limit = 12) => {
     try {
       set({ isLoadingRecipes: true });

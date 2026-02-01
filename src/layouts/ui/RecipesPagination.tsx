@@ -20,7 +20,6 @@ export const RecipesPagination = ({
       <Pagination.PaginationContent>
         <Pagination.PaginationItem>
           <Pagination.PaginationPrevious
-            href="#"
             onClick={handlePreviousPage}
             className={`${currentPage == 1 ? "hidden" : ""}`}
           />
@@ -28,7 +27,6 @@ export const RecipesPagination = ({
         {Array.from({ length: pages }, (_, index) => (
           <Pagination.PaginationItem key={index}>
             <Pagination.PaginationLink
-              href="#"
               onClick={() => handleSetPage(index + 1)}
               className={`${currentPage == index + 1 ? "bg-orange" : ""}`}
             >
@@ -39,7 +37,6 @@ export const RecipesPagination = ({
 
         <Pagination.PaginationItem>
           <Pagination.PaginationNext
-            href="#"
             onClick={handleNextPage}
             className={`${currentPage === pages ? "hidden" : ""}`}
           />

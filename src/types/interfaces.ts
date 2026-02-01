@@ -47,7 +47,7 @@ export interface RecipesResnose {
 }
 export interface RecipesInputProps {
   tabValue: Difficulty | null;
-  setSkip: (value: number) => void;
+  setSkip?: (value: number) => void;
   setDebouncedSearch: (value: string) => void;
   search: string;
   setSearch: (value: string) => void;
