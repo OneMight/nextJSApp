@@ -3,7 +3,7 @@ import { Button } from "@/components";
 import { cn } from "@/lib/utils";
 import { useRecipesStore } from "@/store/recipesStore";
 import Image from "next/image";
-import { use, useEffect, useRef, useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   ServingsIcon,
   KcalIcon,
@@ -26,19 +26,18 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
   } = useRecipesStore();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isSaved, setIsSaved] = useState(
-    !savedRecipes.some((item) => item.id === currentRecipe?.id),
-  );
+
   useEffect(() => {
     getRecipeById(id);
-  }, [getRecipeById, id, isSaved]);
+  }, [getRecipeById, id]);
+  const isSaved = currentRecipe
+    ? savedRecipes.some((item) => item.id === currentRecipe.id)
+    : false;
   const handleSaveRecipe = () => {
-    if (isSaved) {
+    if (!isSaved) {
       saveRecipe(currentRecipe!);
-      setIsSaved(false);
     } else {
       removeFromSaved(currentRecipe!.id);
-      setIsSaved(true);
     }
   };
   const back = searchParams.get("back");
@@ -47,7 +46,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
   };
   return (
     <main className="flex flex-col items-start p-5 w-full justify-start ">
-      {!currentRecipe ? (
+      {isLoadingRecipes ? (
         <Loading />
       ) : (
         <>
@@ -116,15 +115,15 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
                     className={cn(
                       "rounded-full",
                       isSaved
-                        ? "bg-difficult-hard/10 hover:bg-difficult-hard/30"
-                        : "bg-difficult-easy/10 hover:bg-difficult-easy/30",
+                        ? "bg-difficult-easy/10 hover:bg-difficult-easy/30"
+                        : "bg-difficult-hard/10 hover:bg-difficult-hard/30",
                     )}
                     size="icon"
                     onClick={handleSaveRecipe}
                   >
                     <Image
-                      src={isSaved ? LikeIcon : SuccessIcon}
-                      alt={isSaved ? "save recipe" : "Actual saved"}
+                      src={isSaved ? SuccessIcon : LikeIcon}
+                      alt={isSaved ? "Actual saved" : "save recipe"}
                     />
                   </Button>
                 </div>

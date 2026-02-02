@@ -56,3 +56,8 @@ export interface RecipesInputProps {
 export interface FilteredRecipesProps {
   tabValue: string;
 }
+export interface RecipeCredentionalsProps {
+  currentRecipe: Recipe;
+  isSaved: boolean;
+  handleSaveRecipe: () => void;
+}
