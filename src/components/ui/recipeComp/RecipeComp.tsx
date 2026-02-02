@@ -10,7 +10,7 @@ import { Trash2 } from "lucide-react";
 import { MouseEvent } from "react";
 import { useRecipesStore } from "@/store/recipesStore";
 
-export const RecipeComp = ({ recipe, isSaved }: RecipeProps) => {
+export const RecipeComp = ({ recipe, isSaved, backpage }: RecipeProps) => {
   const { removeFromSaved } = useRecipesStore();
   const handleDeleteFromSaved = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ export const RecipeComp = ({ recipe, isSaved }: RecipeProps) => {
   };
   return (
     <Link
-      href={`${ROUTES.RECIPES}/${recipe.id}`}
+      href={`${ROUTES.RECIPES}/${recipe.id}${backpage ? `?back=${backpage}` : ""}`}
       className="w-67.5 shrink-0 relative bg-white-fg rounded-2xl hover:drop-shadow-md transition hover:cursor-pointer group"
     >
       <div className="overflow-hidden">

@@ -27,7 +27,10 @@ export const RecipesInput = ({
   };
   return (
     <div
-      className={cn(`w-full relative max-w-200`, `${!!tabValue && "hidden"}`)}
+      className={cn(
+        `w-full relative max-w-200`,
+        `${tabValue !== "All" && "hidden"}`,
+      )}
     >
       <Input
         value={search}

@@ -11,10 +11,14 @@ import {
   LikeIcon,
   SuccessIcon,
 } from "@/shared/images";
+import { ArrowLeft } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 export default function Page({ params }: { params: Promise<{ id: number }> }) {
   const { id } = use(params);
   const { getRecipeById, currentRecipe, saveRecipe, savedRecipes } =
     useRecipesStore();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const isSaved = !savedRecipes.some((item) => item.id === currentRecipe?.id);
   useEffect(() => {
     getRecipeById(id);
@@ -24,11 +28,18 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
       saveRecipe(currentRecipe!);
     }
   };
+  const back = searchParams.get("back");
+  const handleBack = () => {
+    router.back();
+  };
   return (
-    <main className="flex flex-col items-center xlg:p-10 w-full justify-start ">
+    <main className="flex flex-col items-start p-5 w-full justify-start ">
+      <Button onClick={handleBack} className="flex gap-3 items-center">
+        <ArrowLeft /> Back to {back ? "Home" : "Recipes"}
+      </Button>
       {currentRecipe && (
         <>
-          <div className="w-full xlg:rounded-t-2xl overflow-hidden max-w-325">
+          <div className="w-full rounded-t-2xl overflow-hidden max-w-325">
             <div className="relative h-64 xlg:h-96 w-full">
               <Image
                 fill

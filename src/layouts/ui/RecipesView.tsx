@@ -36,7 +36,7 @@ export const RecipesView = () => {
 
   const updateUrl = (newDifficulty: string, newSkip: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (newDifficulty && newDifficulty !== "All") {
+    if (newDifficulty !== "All") {
       params.set("difficulty", newDifficulty);
     } else {
       params.delete("difficulty");
@@ -49,7 +49,9 @@ export const RecipesView = () => {
     router.push(`${pathname}?${params.toString()}`);
   };
   const filteredRecipes = useMemo(() => {
-    if (currentDifficulty === "All") return recipes;
+    if (currentDifficulty === "All") {
+      return recipes;
+    }
     return recipes.filter((recipe) => recipe.difficulty === currentDifficulty);
   }, [recipes, currentDifficulty]);
   const handleSetPage = (pageNumber: number) => {
@@ -65,7 +67,7 @@ export const RecipesView = () => {
   return (
     <div className="flex flex-col gap-10 justify-between w-full">
       <RecipesInput
-        tabValue={currentDifficulty === "All" ? null : currentDifficulty}
+        tabValue={currentDifficulty}
         search={search}
         setSearch={setSearch}
         setDebouncedSearch={setDebouncedSearch}

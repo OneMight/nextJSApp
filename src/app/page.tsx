@@ -1,6 +1,6 @@
 import { FooterCard, HomeSection } from "@/components";
 import { ScrollRecipes } from "@/layouts/index";
-export default async function Page() {
+export default function Page() {
   return (
     <div className="flex flex-col justify-start items-center gap-8 w-full py-4 px-0">
       <HomeSection />
