@@ -2,13 +2,13 @@ import { Skeleton } from "@/components";
 
 export default function Loading() {
   return (
-    <main className="w-full flex flex-col items-center p-4">
-      <div className="w-full max-w-325 flex justify-start mb-4">
+    <main className="w-full flex flex-col items-center">
+      <div className="w-full max-w-325 flex justify-start">
         <Skeleton className="h-10 w-32 rounded-lg" />
       </div>
 
-      <div className="w-full rounded-t-2xl overflow-hidden max-w-325 relative h-64 xlg:h-96 bg-gray-200 animate-pulse">
-        <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full">
+      <div className="w-full rounded-t-2xl overflow-hidden max-w-325 relative h-72 xlg:h-96 bg-gray-200 animate-pulse">
+        <div className="absolute bottom-0 left-0 p-4 w-full">
           <div className="flex gap-3 mb-4">
             <Skeleton className="h-6 w-20 rounded-2xl" />
             <Skeleton className="h-6 w-24 bg-white/20" />

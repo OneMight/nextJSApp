@@ -3,7 +3,7 @@ import { Button } from "@/components";
 import { cn } from "@/lib/utils";
 import { useRecipesStore } from "@/store/recipesStore";
 import Image from "next/image";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import {
   ServingsIcon,
   KcalIcon,
@@ -122,11 +122,10 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
                     size="icon"
                     onClick={handleSaveRecipe}
                   >
-                    {isSaved ? (
-                      <Image src={LikeIcon} alt="save recipe" />
-                    ) : (
-                      <Image src={SuccessIcon} alt="Actual saved" />
-                    )}
+                    <Image
+                      src={isSaved ? LikeIcon : SuccessIcon}
+                      alt={isSaved ? "save recipe" : "Actual saved"}
+                    />
                   </Button>
                 </div>
                 <article className="flex flex-col slt:flex-row items-start justify-between w-full gap-3 pt-5 max-w-325">
