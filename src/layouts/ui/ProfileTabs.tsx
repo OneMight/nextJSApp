@@ -22,7 +22,7 @@ export const ProfileTabs = () => {
         {!isLoadingRecipes ? (
           <>
             {userRecipes.map((recipe, index) => (
-              <RecipeComp recipe={recipe} key={index} />
+              <RecipeComp recipe={recipe} key={index} backpage="/profile" />
             ))}
             <CreateRecipe />
           </>
