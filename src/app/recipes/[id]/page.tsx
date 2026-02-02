@@ -47,7 +47,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
   };
   return (
     <main className="flex flex-col items-start p-5 w-full justify-start ">
-      {isLoadingRecipes ? (
+      {!currentRecipe ? (
         <Loading />
       ) : (
         <>
