@@ -34,13 +34,9 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
   }, [getRecipeById, id, isSaved]);
   const handleSaveRecipe = () => {
     if (isSaved) {
-      console.log(true);
-
       saveRecipe(currentRecipe!);
       setIsSaved(false);
     } else {
-      console.log(false);
-
       removeFromSaved(currentRecipe!.id);
       setIsSaved(true);
     }

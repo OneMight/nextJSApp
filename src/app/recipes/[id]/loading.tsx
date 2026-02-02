@@ -13,7 +13,7 @@ export default function Loading() {
             <Skeleton className="h-6 w-20 rounded-2xl" />
             <Skeleton className="h-6 w-24 bg-white/20" />
           </div>
-          <Skeleton className="h-10 w-3/4 md:w-1/2 bg-white/40" />{" "}
+          <Skeleton className="h-10 w-3/4 md:w-1/2 bg-white/40" />
         </div>
       </div>
 
@@ -40,8 +40,8 @@ export default function Loading() {
           <div className="flex flex-col gap-4 w-full slt:w-1/3">
             <Skeleton className="h-8 w-40 mb-2" />
             <div className="flex flex-col gap-3 bml:pl-5">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Skeleton key={i} className="h-5 w-full" />
+              {Array.from({ length: 6 }, (_, index) => (
+                <Skeleton key={index} className="h-5 w-full" />
               ))}
             </div>
           </div>
@@ -49,8 +49,8 @@ export default function Loading() {
           <div className="flex flex-col gap-4 w-full slt:w-2/3">
             <Skeleton className="h-8 w-40 mb-2" />
             <div className="flex flex-col gap-8 bml:pl-5">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex flex-row gap-3">
+              {Array.from({ length: 3 }, (_, index) => (
+                <div key={index} className="flex flex-row gap-3">
                   <Skeleton className="shrink-0 w-10 h-10 rounded-full" />
                   <div className="flex flex-col gap-2 w-full pt-1">
                     <Skeleton className="h-5 w-full" />
