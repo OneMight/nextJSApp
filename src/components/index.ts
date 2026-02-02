@@ -17,6 +17,7 @@ import * as DrawerComponents from "./ui/Drawer";
 import * as Select from "./ui/Select";
 import EditProfileForm from "./ui/EditProfileForm";
 import { CreateRecipeForm } from "./ui/CreateRecipeForm";
+import { RecipesInput } from "./ui/RecipesInput";
 export {
   Button,
   LinkSide,
@@ -37,4 +38,5 @@ export {
   CreateRecipeForm,
   Select,
   Alert,
+  RecipesInput,
 };

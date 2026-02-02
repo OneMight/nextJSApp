@@ -17,6 +17,7 @@ export interface LinkCompProp extends ComponentProps {
 export interface RecipeProps {
   recipe: Recipe;
   isSaved?: boolean;
+  backpage?: string;
 }
 export interface ScrollRecipesProps {
   recipes: Recipe[];
@@ -44,4 +45,14 @@ export interface SelectDifficultProps {
 
 export interface RecipesResnose {
   recipes: Recipe[];
+}
+export interface RecipesInputProps {
+  tabValue: Difficulty;
+  setSkip?: (value: number) => void;
+  setDebouncedSearch: (value: string) => void;
+  search: string;
+  setSearch: (value: string) => void;
+}
+export interface FilteredRecipesProps {
+  tabValue: string;
 }

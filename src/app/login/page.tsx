@@ -8,9 +8,6 @@ import { MyAlert } from "@/components/ui/MyAlert";
 
 export default function Login() {
   const { error } = useUserStore();
-  if (!!error) {
-    console.log(error);
-  }
 
   return (
     <div className="flex flex-col items-center justify-center w-full drop-shadow-xl h-screen relative">

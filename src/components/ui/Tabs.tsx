@@ -36,6 +36,7 @@ function TabsList({
 
 function TabsTrigger({
   className,
+
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
   return (
@@ -68,8 +69,9 @@ function TabsContent({
     <TabsPrimitive.Content
       data-slot="tabs-content"
       className={cn(
-        "grid lt:grid-cols-4 slt:grid-cols-3 w-full max-w-300 sm:max-slt:grid-cols-2 justify-center grid-cols-[minmax(1,270px)]  gap-4 grid-rows-1 outline-none",
+        "grid lt:grid-cols-4 slt:grid-cols-3 w-full max-w-281 sm:max-slt:grid-cols-2 justify-center grid-cols-[minmax(1,270px)]  gap-4 grid-rows-1 outline-none",
         className,
+        0,
       )}
       {...props}
     />

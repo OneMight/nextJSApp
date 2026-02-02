@@ -1,137 +1,112 @@
 "use client";
-import { Input, RecipeComp, RecipeSkeleton, Tabs } from "@/components";
-import { cn } from "@/lib/utils";
-import { Recipe, useRecipesStore } from "@/store/recipesStore";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { RecipeComp, RecipesInput, RecipeSkeleton, Tabs } from "@/components";
+import { useRecipesStore } from "@/store/recipesStore";
 import { Difficulty } from "@/types/types";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { RecipesPagination } from "./RecipesPagination";
-import { useUserStore } from "@/store/userStore";
+
 export const RecipesView = () => {
-  const {
-    fetchRecipes,
-    recipes,
-    isLoadingRecipes,
-    allRecipes,
-    findRecipe,
-    pages,
-    fetchAllRecipes,
-  } = useRecipesStore();
-  const { isLoading } = useUserStore();
-  const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
-  const [debouncedSearch, setDebouncedSearch] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [skip, setSkip] = useState<number>(0);
-  const [search, setSearch] = useState<string>("");
-  const [tabValue, setTabValue] = useState<Difficulty | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const currentDifficulty =
+    (searchParams.get("difficulty") as Difficulty) || "All";
+  const currentSkip = Number(searchParams.get("skip")) || 0;
+  const currentSearch = searchParams.get("search") || "";
+  const currentPage = Math.floor(currentSkip / 12);
+  const { recipes, isLoadingRecipes, findRecipe, pages } = useRecipesStore();
+  const [search, setSearch] = useState<string>(currentSearch);
+  const [debouncedSearch, setDebouncedSearch] = useState<string>(currentSearch);
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 300);
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [search]);
-  useEffect(() => {
-    if (!isLoading) {
-      fetchAllRecipes();
-      findRecipe(debouncedSearch, skip);
+    const params = new URLSearchParams(searchParams.toString());
+    if (debouncedSearch) {
+      params.set("search", debouncedSearch);
+    } else {
+      params.delete("search");
     }
-  }, [debouncedSearch, findRecipe, skip, isLoading, fetchAllRecipes]);
-  const handleFetchRecipes = () => {
-    setTabValue(null);
-    fetchRecipes(12, skip);
+    params.delete("skip");
+    router.replace(`${pathname}?${params.toString()}`);
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    findRecipe(currentSearch, currentSkip);
+  }, [currentSearch, currentSkip, findRecipe]);
+
+  const updateUrl = (newDifficulty: string, newSkip: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (newDifficulty !== "All") {
+      params.set("difficulty", newDifficulty);
+    } else {
+      params.delete("difficulty");
+    }
+    if (newSkip > 0) {
+      params.set("skip", newSkip.toString());
+    } else {
+      params.delete("skip");
+    }
+    router.push(`${pathname}?${params.toString()}`);
   };
-  const handleGetRecipesByDifficulty = (difficult: Difficulty) => {
-    setTabValue(difficult);
-    setFilteredRecipes(
-      allRecipes.filter((elem) => elem.difficulty === difficult),
-    );
-  };
-  const handleSetPage = (index: number) => {
-    setSkip(12 * index);
-    setCurrentPage(index);
-  };
-  const handleSetSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    setSkip(0);
+  const filteredRecipes = useMemo(() => {
+    if (currentDifficulty === "All") {
+      return recipes;
+    }
+    return recipes.filter((recipe) => recipe.difficulty === currentDifficulty);
+  }, [recipes, currentDifficulty]);
+  const handleSetPage = (pageNumber: number) => {
+    updateUrl(currentDifficulty, (pageNumber - 1) * 12);
   };
   const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1);
-    setSkip((prev) => prev + 12);
+    updateUrl(currentDifficulty, currentSkip + 12);
   };
   const handlePreviousPage = () => {
-    setCurrentPage((prev) => prev - 1);
-    setSkip((prev) => prev - 12);
+    updateUrl(currentDifficulty, Math.max(0, currentSkip - 12));
   };
+
   return (
-    <div className="flex flex-col gap-10 w-full">
-      <Input
-        value={search}
-        onChange={(e) => handleSetSearch(e)}
-        placeholder="Search recipes..."
-        className={cn(
-          "h-15 bg-white-fg pl-10 max-w-200",
-          `${!!tabValue && "hidden"}`,
-        )}
+    <div className="flex flex-col gap-10 justify-between w-full">
+      <RecipesInput
+        tabValue={currentDifficulty}
+        search={search}
+        setSearch={setSearch}
+        setDebouncedSearch={setDebouncedSearch}
       />
       <Tabs.Tabs
-        defaultValue={"All"}
+        value={currentDifficulty}
+        onValueChange={(value) => updateUrl(value, 0)}
         className="w-full flex flex-col items-center sm:items-start gap-4"
       >
         <Tabs.TabsList>
-          <Tabs.TabsTrigger value="All" onClick={handleFetchRecipes}>
-            All
-          </Tabs.TabsTrigger>
-          <Tabs.TabsTrigger
-            value="Easy"
-            onClick={() => handleGetRecipesByDifficulty("Easy")}
-          >
-            Easy
-          </Tabs.TabsTrigger>
-          <Tabs.TabsTrigger
-            value="Medium"
-            onClick={() => handleGetRecipesByDifficulty("Medium")}
-          >
-            Medium
-          </Tabs.TabsTrigger>
-          <Tabs.TabsTrigger
-            value="Hard"
-            onClick={() => handleGetRecipesByDifficulty("Hard")}
-          >
-            Hard
-          </Tabs.TabsTrigger>
+          <Tabs.TabsTrigger value="All">All</Tabs.TabsTrigger>
+          <Tabs.TabsTrigger value="Easy">Easy</Tabs.TabsTrigger>
+          <Tabs.TabsTrigger value="Medium">Medium</Tabs.TabsTrigger>
+          <Tabs.TabsTrigger value="Hard">Hard</Tabs.TabsTrigger>
         </Tabs.TabsList>
-        <Tabs.TabsContent value="All">
+
+        <Tabs.TabsContent value={currentDifficulty}>
           {!isLoadingRecipes ? (
-            recipes &&
-            recipes.map((recipe) => (
-              <RecipeComp key={recipe.id} recipe={recipe} />
-            ))
+            (currentDifficulty === "All" ? recipes : filteredRecipes).length >
+            0 ? (
+              (currentDifficulty === "All" ? recipes : filteredRecipes).map(
+                (recipe) => <RecipeComp key={recipe.id} recipe={recipe} />,
+              )
+            ) : (
+              <p>Nothing found</p>
+            )
           ) : (
-            <>
-              {Array.from({ length: 8 }, (_, index) => (
-                <RecipeSkeleton key={index} />
-              ))}
-            </>
-          )}
-        </Tabs.TabsContent>
-        <Tabs.TabsContent value={tabValue as string}>
-          {filteredRecipes.length !== 0 ? (
-            filteredRecipes.map((recipe) => (
-              <RecipeComp key={recipe.id} recipe={recipe} />
-            ))
-          ) : (
-            <p>There is no {tabValue} recipes</p>
+            Array.from({ length: 8 }).map((_, i) => <RecipeSkeleton key={i} />)
           )}
         </Tabs.TabsContent>
       </Tabs.Tabs>
-      {!tabValue && (
+
+      {currentDifficulty === "All" && pages > 1 && recipes.length > 0 && (
         <RecipesPagination
           pages={pages}
           handleNextPage={handleNextPage}
           handlePreviousPage={handlePreviousPage}
           handleSetPage={handleSetPage}
-          currentPage={currentPage}
+          currentPage={currentPage + 1}
         />
       )}
     </div>
