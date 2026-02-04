@@ -3,16 +3,27 @@ import { cn } from "@/lib/utils";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { CircleXIcon } from "lucide-react";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { RecipesInputProps } from "@/types/interfaces";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export const RecipesInput = ({
-  tabValue,
-  setSkip,
-  search,
-  setSearch,
-  setDebouncedSearch,
-}: RecipesInputProps) => {
+export const RecipesInput = ({ tabValue, setSkip }: RecipesInputProps) => {
+  const [search, setSearch] = useState<string>("");
+  const [debouncedSearch, setDebouncedSearch] = useState<string>("");
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (debouncedSearch) {
+      params.set("search", debouncedSearch);
+    } else {
+      params.delete("search");
+    }
+    params.delete("skip");
+    router.replace(`${pathname}?${params.toString()}`);
+  }, [debouncedSearch]);
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(search);

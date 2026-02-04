@@ -3,7 +3,7 @@ import { Button } from "@/components";
 import { cn } from "@/lib/utils";
 import { useRecipesStore } from "@/store/recipesStore";
 import Image from "next/image";
-import { use, useEffect, useState } from "react";
+import { use, useEffect } from "react";
 import {
   ServingsIcon,
   KcalIcon,
