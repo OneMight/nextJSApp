@@ -3,7 +3,7 @@ import { ROUTES } from "@/shared/routes";
 import { redirect } from "next/navigation";
 
 export const UnauthUser = () => {
-  const handleDirect = (route: string) => {
+  const handleDirect = (route: string) => () => {
     redirect(route);
   };
   return (
@@ -16,13 +16,13 @@ export const UnauthUser = () => {
         </p>
         <div className="flex flex-row gap-3">
           <Button
-            onClick={() => handleDirect(ROUTES.LOGIN)}
+            onClick={handleDirect(ROUTES.LOGIN)}
             className="bg-orange w-35"
           >
             Yes
           </Button>
           <Button
-            onClick={() => handleDirect(ROUTES.HOME)}
+            onClick={handleDirect(ROUTES.HOME)}
             className="w-35"
             variant={"outline"}
           >

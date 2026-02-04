@@ -26,16 +26,6 @@ export const RecipesView = () => {
   }, [recipes, currentDifficulty]);
   const recipeArray = currentDifficulty === "All" ? recipes : filteredRecipes;
 
-  const handleSetPage = (pageNumber: number) => {
-    updateParams(currentDifficulty, (pageNumber - 1) * 12);
-  };
-  const handleNextPage = () => {
-    updateParams(currentDifficulty, currentSkip + 12);
-  };
-  const handlePreviousPage = () => {
-    updateParams(currentDifficulty, Math.max(0, currentSkip - 12));
-  };
-
   return (
     <div className="flex flex-col gap-10 justify-between w-full">
       <RecipesInput tabValue={currentDifficulty} />
@@ -69,9 +59,9 @@ export const RecipesView = () => {
       {currentDifficulty === "All" && pages > 1 && recipes.length > 0 && (
         <RecipesPagination
           pages={pages}
-          handleNextPage={handleNextPage}
-          handlePreviousPage={handlePreviousPage}
-          handleSetPage={handleSetPage}
+          updateParams={updateParams}
+          currentDifficulty={currentDifficulty}
+          currentSkip={currentSkip}
           currentPage={currentPage + 1}
         />
       )}

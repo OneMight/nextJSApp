@@ -19,36 +19,36 @@ export const CreateRecipeForm = () => {
   const handleSetNewRecipe = (e: ChangeEvent<HTMLInputElement>) => {
     setNewRecipe((state) => ({ ...state, [e.target.id]: e.target.value }));
   };
-  const handleSetDifficulty = (value: Difficulty) => {
+  const handleSetDifficulty = (value: Difficulty) => () => {
     setNewRecipe((state) => ({ ...state, difficulty: value }));
   };
-  const handleArrayChange = (
-    type: "ingredients" | "instructions",
-    index: number,
-    value: string,
-  ) => {
-    setNewRecipe((prev) => {
-      const updatedArray = [...(prev[type] || [])];
-      updatedArray[index] = value;
-      return { ...prev, [type]: updatedArray };
-    });
-  };
+  const handleArrayChange =
+    (
+      type: "ingredients" | "instructions",
+      index: number,
+      e: ChangeEvent<HTMLInputElement>,
+    ) =>
+    () => {
+      setNewRecipe((prev) => {
+        const updatedArray = [...(prev[type] || [])];
+        updatedArray[index] = e.target.value;
+        return { ...prev, [type]: updatedArray };
+      });
+    };
 
-  const addArrayItem = (type: "ingredients" | "instructions") => {
+  const addArrayItem = (type: "ingredients" | "instructions") => () => {
     setNewRecipe((prev) => ({
       ...prev,
       [type]: [...(prev[type] || []), ""],
     }));
   };
-  const removeArrayItem = (
-    type: "ingredients" | "instructions",
-    index: number,
-  ) => {
-    setNewRecipe((prev) => ({
-      ...prev,
-      [type]: (prev[type] || []).filter((_, i) => i !== index),
-    }));
-  };
+  const removeArrayItem =
+    (type: "ingredients" | "instructions", index: number) => () => {
+      setNewRecipe((prev) => ({
+        ...prev,
+        [type]: (prev[type] || []).filter((_, i) => i !== index),
+      }));
+    };
   return (
     <ScrollArea className="w-full">
       <Form.Form {...form}>
@@ -173,7 +173,7 @@ export const CreateRecipeForm = () => {
                 variant="ghost"
                 size="sm"
                 className="text-orange/70 hover:text-orange"
-                onClick={() => addArrayItem("ingredients")}
+                onClick={addArrayItem("ingredients")}
               >
                 <Plus className="w-4 h-4 mr-1" /> Add
               </Button>
@@ -192,11 +192,7 @@ export const CreateRecipeForm = () => {
                             placeholder="e.g. 1 cup Arborio rice"
                             value={item}
                             onChange={(e) =>
-                              handleArrayChange(
-                                "ingredients",
-                                index,
-                                e.target.value,
-                              )
+                              handleArrayChange("ingredients", index, e)
                             }
                           />
                         </Form.FormControl>
@@ -204,7 +200,7 @@ export const CreateRecipeForm = () => {
                           type="button"
                           variant="ghost"
                           size="icon"
-                          onClick={() => removeArrayItem("ingredients", index)}
+                          onClick={removeArrayItem("ingredients", index)}
                           disabled={newRecipe.ingredients.length === 1}
                         >
                           <Trash2 className="w-4 h-4 text-gray-400 hover:text-difficult-hard" />
@@ -226,7 +222,7 @@ export const CreateRecipeForm = () => {
                 variant="ghost"
                 size="sm"
                 className="text-orange/70 hover:text-orange"
-                onClick={() => addArrayItem("instructions")}
+                onClick={addArrayItem("instructions")}
               >
                 <Plus className="w-4 h-4 mr-1" /> Add
               </Button>
@@ -249,11 +245,7 @@ export const CreateRecipeForm = () => {
                             placeholder="Describe this step..."
                             value={item}
                             onChange={(e) =>
-                              handleArrayChange(
-                                "instructions",
-                                index,
-                                e.target.value,
-                              )
+                              handleArrayChange("instructions", index, e)
                             }
                           />
                         </Form.FormControl>
@@ -261,7 +253,7 @@ export const CreateRecipeForm = () => {
                           variant="ghost"
                           size="icon"
                           className="mt-1"
-                          onClick={() => removeArrayItem("instructions", index)}
+                          onClick={removeArrayItem("instructions", index)}
                           disabled={newRecipe.instructions.length === 1}
                         >
                           <Trash2 className="w-4 h-4 text-secondary-text hover:text-difficult-hard" />

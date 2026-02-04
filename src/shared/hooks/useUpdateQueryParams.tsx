@@ -2,7 +2,6 @@
 
 import { Difficulty } from "@/types/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 export const useUpdateQueryParams = () => {
   const searchParams = useSearchParams();

@@ -36,6 +36,9 @@ export const RecipesInput = ({ tabValue, setSkip }: RecipesInputProps) => {
     setSearch(e.target.value);
     setSkip?.(0);
   };
+  const handleClearInput = () => {
+    setSearch("");
+  };
   return (
     <div
       className={cn(
@@ -51,7 +54,7 @@ export const RecipesInput = ({ tabValue, setSkip }: RecipesInputProps) => {
       />
 
       <Button
-        onClick={() => setSearch("")}
+        onClick={handleClearInput}
         size={"icon"}
         className="absolute top-3 right-2 hover:bg-orange"
       >

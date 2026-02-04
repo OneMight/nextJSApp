@@ -1,20 +1,30 @@
 "use client";
 import { Pagination } from "@/components";
+import { Difficulty } from "@/types/types";
 interface RecipesPaginationProps {
   pages: number;
   currentPage: number;
-  handleNextPage: () => void;
-  handlePreviousPage: () => void;
-  handleSetPage: (index: number) => void;
+  updateParams: (newDifficulty: string, newSkip: number) => void;
+  currentDifficulty: Difficulty;
+  currentSkip: number;
 }
 
 export const RecipesPagination = ({
   pages,
-  handlePreviousPage,
-  handleNextPage,
-  handleSetPage,
   currentPage,
+  updateParams,
+  currentDifficulty,
+  currentSkip,
 }: RecipesPaginationProps) => {
+  const handleSetPage = (pageNumber: number) => () => {
+    updateParams(currentDifficulty, (pageNumber - 1) * 12);
+  };
+  const handleNextPage = () => {
+    updateParams(currentDifficulty, currentSkip + 12);
+  };
+  const handlePreviousPage = () => {
+    updateParams(currentDifficulty, Math.max(0, currentSkip - 12));
+  };
   return (
     <Pagination.Pagination>
       <Pagination.PaginationContent>
@@ -27,7 +37,7 @@ export const RecipesPagination = ({
         {Array.from({ length: pages }, (_, index) => (
           <Pagination.PaginationItem key={index}>
             <Pagination.PaginationLink
-              onClick={() => handleSetPage(index + 1)}
+              onClick={handleSetPage(index + 1)}
               className={`${currentPage == index + 1 ? "bg-orange" : ""}`}
             >
               {index + 1}
