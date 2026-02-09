@@ -1,7 +1,7 @@
 import { RecipeSkeleton } from "@/components";
 
-export const ScrollRecipesSkeleton = () => {
-  return Array.from({ length: 6 }, (_, index) => (
+export const ScrollRecipesSkeleton = ({ count = 8 }: { count?: number }) => {
+  return Array.from({ length: count }, (_, index) => (
     <RecipeSkeleton key={index} />
   ));
 };

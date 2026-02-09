@@ -26,7 +26,7 @@ export const ScrollRecipes = async () => {
 
       <div className="overflow-x-auto w-full">
         <div className="flex flex-row gap-4 no-scrollbar py-4 w-100">
-          <Suspense fallback={<ScrollRecipesSkeleton />}>
+          <Suspense fallback={<ScrollRecipesSkeleton count={6} />}>
             {recipes.map((recipe: Recipe) => (
               <RecipeComp key={recipe.id} recipe={recipe} backpage="/home" />
             ))}

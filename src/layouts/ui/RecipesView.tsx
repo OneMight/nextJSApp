@@ -1,10 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { RecipeComp, RecipesInput, RecipeSkeleton, Tabs } from "@/components";
+import { RecipeComp, RecipesInput, Tabs } from "@/components";
 import { useRecipesStore } from "@/store/recipesStore";
 import { useEffect, useMemo } from "react";
 import { RecipesPagination } from "./RecipesPagination";
 import { useUpdateQueryParams } from "@/shared/hooks/useUpdateQueryParams";
+import { ScrollRecipesSkeleton } from "./ScrollRecipes/ScrollRecipesSkeleton";
 
 export const RecipesView = () => {
   const searchParams = useSearchParams();
@@ -51,7 +52,7 @@ export const RecipesView = () => {
               <p>Nothing found</p>
             )
           ) : (
-            Array.from({ length: 8 }).map((_, i) => <RecipeSkeleton key={i} />)
+            <ScrollRecipesSkeleton />
           )}
         </Tabs.TabsContent>
       </Tabs.Tabs>
