@@ -11,7 +11,8 @@ import { CreateRecipe } from "./ui/CreateRecipe";
 import { UnauthUser } from "./ui/UnauthUser";
 import { MobileBar } from "./ui/MobileBar";
 import { ScrollRecipesSkeleton } from "./ui/ScrollRecipes/ScrollRecipesSkeleton";
-
+import { CreateRecipeDesktop } from "./ui/CreateRecipeDesktop";
+import { CreateRecipeMobile } from "./ui/CreateRecipeMobile";
 export {
   NavSide,
   LoginForm,
@@ -26,4 +27,6 @@ export {
   UnauthUser,
   MobileBar,
   ScrollRecipesSkeleton,
+  CreateRecipeDesktop,
+  CreateRecipeMobile,
 };

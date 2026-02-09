@@ -58,3 +58,6 @@ export interface RecipeCredentionalsProps {
   isSaved: boolean;
   handleSaveRecipe: () => void;
 }
+export interface ProfileTabsProps {
+  userRecipes: React.ReactNode;
+}

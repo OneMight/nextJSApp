@@ -1,5 +1,3 @@
-"use client";
-
 import { Difficulty } from "@/types/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 

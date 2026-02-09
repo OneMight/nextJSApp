@@ -33,6 +33,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
   const isSaved = currentRecipe
     ? savedRecipes.some((item) => item.id === currentRecipe.id)
     : false;
+
   const handleSaveRecipe = () => {
     if (!isSaved) {
       saveRecipe(currentRecipe!);
@@ -40,10 +41,19 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
       removeFromSaved(currentRecipe!.id);
     }
   };
-  const back = searchParams.get("back");
+  const backPage = {
+    "/home": "Home",
+    "/profile": "Profile",
+  };
+  const backParams = searchParams.get("back");
+  const back =
+    backParams && Object.keys(backPage).includes(backParams)
+      ? (backParams as keyof typeof backPage)
+      : null;
   const handleBack = () => {
     router.back();
   };
+
   return (
     <main className="flex flex-col items-start p-5 w-full justify-start ">
       {isLoadingRecipes ? (
@@ -51,12 +61,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
       ) : (
         <>
           <Button onClick={handleBack} className="flex gap-3 items-center">
-            <ArrowLeft /> Back to{" "}
-            {back == "/home"
-              ? "Home"
-              : back == "/profile"
-                ? "Profile"
-                : "Recipes"}
+            <ArrowLeft /> Back to {back ? backPage[back] : "Recipes"}
           </Button>
           {currentRecipe && (
             <>

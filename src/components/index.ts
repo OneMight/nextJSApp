@@ -18,6 +18,7 @@ import * as Select from "./ui/Select";
 import EditProfileForm from "./ui/EditProfileForm";
 import { CreateRecipeForm } from "./ui/CreateRecipeForm";
 import { RecipesInput } from "./ui/RecipesInput";
+import { UserRecipes } from "./ui/UserRecipes";
 export {
   Button,
   LinkSide,
@@ -39,4 +40,5 @@ export {
   Select,
   Alert,
   RecipesInput,
+  UserRecipes,
 };

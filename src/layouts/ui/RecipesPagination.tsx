@@ -1,4 +1,3 @@
-"use client";
 import { Pagination } from "@/components";
 import { Difficulty } from "@/types/types";
 interface RecipesPaginationProps {

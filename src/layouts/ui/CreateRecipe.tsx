@@ -1,13 +1,8 @@
 "use client";
-
 import { useState } from "react";
-import {
-  Button,
-  CreateRecipeForm,
-  DialogComponents,
-  DrawerComponents,
-} from "@/components/index";
+import { Button, DialogComponents, DrawerComponents } from "@/components/index";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+import { CreateRecipeDesktop, CreateRecipeMobile } from "@/layouts/index";
 
 export function CreateRecipe() {
   const [open, setOpen] = useState<boolean>(false);
@@ -20,14 +15,7 @@ export function CreateRecipe() {
             Create New Recipe
           </Button>
         </DialogComponents.DialogTrigger>
-        <DialogComponents.DialogContent className="sm:max-w-200 w-full bg-white-fg">
-          <DialogComponents.DialogHeader>
-            <DialogComponents.DialogTitle>
-              Create Recipe
-            </DialogComponents.DialogTitle>
-          </DialogComponents.DialogHeader>
-          <CreateRecipeForm />
-        </DialogComponents.DialogContent>
+        <CreateRecipeDesktop />
       </DialogComponents.Dialog>
     );
   }
@@ -40,15 +28,7 @@ export function CreateRecipe() {
         </Button>
       </DrawerComponents.DrawerTrigger>
       <DrawerComponents.DrawerContent className="bg-white-fg">
-        <DrawerComponents.DrawerHeader className="text-left">
-          <DrawerComponents.DrawerTitle>
-            Edit profile
-          </DrawerComponents.DrawerTitle>
-          <DrawerComponents.DrawerDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </DrawerComponents.DrawerDescription>
-        </DrawerComponents.DrawerHeader>
-        <CreateRecipeForm />
+        <CreateRecipeMobile />
         <DrawerComponents.DrawerFooter className="pt-2 flex justify-end">
           <DrawerComponents.DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
