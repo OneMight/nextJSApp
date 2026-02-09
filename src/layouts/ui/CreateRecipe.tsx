@@ -1,13 +1,15 @@
 "use client";
 import { useState } from "react";
 import { Button, DialogComponents, DrawerComponents } from "@/components/index";
-import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { CreateRecipeDesktop, CreateRecipeMobile } from "@/layouts/index";
+import { isDesktopType } from "@/lib/utils";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 
 export function CreateRecipe() {
   const [open, setOpen] = useState<boolean>(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-  if (isDesktop) {
+  const isDesktop = useMediaQuery("(min-width: 825px)");
+
+  if (isDesktopType(isDesktop)) {
     return (
       <DialogComponents.Dialog open={open} onOpenChange={setOpen}>
         <DialogComponents.DialogTrigger asChild>
@@ -29,7 +31,7 @@ export function CreateRecipe() {
       </DrawerComponents.DrawerTrigger>
       <DrawerComponents.DrawerContent className="bg-white-fg">
         <CreateRecipeMobile />
-        <DrawerComponents.DrawerFooter className="pt-2 flex justify-end">
+        <DrawerComponents.DrawerFooter className="pt-2 flex justify-end ">
           <DrawerComponents.DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerComponents.DrawerClose>

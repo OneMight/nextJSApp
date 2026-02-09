@@ -54,7 +54,7 @@ export const CreateRecipeForm = () => {
       <Form.Form {...form}>
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className="flex flex-col gap-4 p-3 max-h-150"
+          className="flex flex-col gap-4 p-3 max-h-130"
         >
           <Form.FormField
             control={form.control}

@@ -4,3 +4,4 @@ export type ChangeCredintionalsType = {
   username?: string;
   lastName?: string;
 };
+export type DeviceType = "desktop" | "mobile";

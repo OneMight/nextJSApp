@@ -2,6 +2,7 @@
 import { RecipeComp, Tabs } from "@/components";
 import { useRecipesStore } from "@/store/recipesStore";
 import { ProfileTabsProps } from "@/types/interfaces";
+import { CreateRecipe } from "./CreateRecipe";
 
 export const ProfileTabs = ({ userRecipes }: ProfileTabsProps) => {
   const { savedRecipes } = useRecipesStore();
@@ -11,7 +12,9 @@ export const ProfileTabs = ({ userRecipes }: ProfileTabsProps) => {
         <Tabs.TabsTrigger value="My recipes">My recipes</Tabs.TabsTrigger>
         <Tabs.TabsTrigger value="Saved">Saved</Tabs.TabsTrigger>
       </Tabs.TabsList>
-      <Tabs.TabsContent value="My recipes">{userRecipes}</Tabs.TabsContent>
+      <Tabs.TabsContent value="My recipes">
+        {userRecipes} <CreateRecipe />
+      </Tabs.TabsContent>
       <Tabs.TabsContent
         className={savedRecipes.length === 0 ? "flex" : ""}
         value="Saved"
